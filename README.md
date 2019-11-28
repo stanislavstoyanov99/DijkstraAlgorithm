@@ -1,5 +1,5 @@
 # Dijkstra Algorithm
-A program that visualizes the work of Dijkstra's algorithm for finding the shortest path in a graph
+*An application as course project for Technician University that visualizes the work of Dijkstra's algorithm for finding the shortest path in a graph*
 ## Project Description
 Настолното приложение ще предоставя модерен графичен интерфейс за работа (Windows Forms). Приложението ще визуализира работата на алгоритъма на Дейкстра, известен още като алгоритъм за намиране на най-къси пътища в граф, решава проблема с намирането на най-краткия път от точка (пр. A) в графа до дадена дестинация (пр. точка F) при неотрицателни тегла на ребрата. Това е алчен алгоритъм, който по същина е подобен на алгоритъма на Прим. В реалната практика може да представлява намирането на най-късия маршрут до даден град както и намира приложение в GPS устройствата с цел оптимизация на транспорта.
 
