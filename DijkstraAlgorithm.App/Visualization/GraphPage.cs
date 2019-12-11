@@ -197,7 +197,7 @@
             }
 
             // Connection Line Reconstruction
-            foreach (IEdge edge in Graph)
+            foreach (IEdge edge in Graph.Edges)
             {
                 using (var pen = new Pen(Color.IndianRed, 2))
                 {

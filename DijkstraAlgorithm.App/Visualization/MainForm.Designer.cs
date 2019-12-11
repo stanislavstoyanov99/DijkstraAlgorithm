@@ -38,8 +38,15 @@ namespace DijkstraAlgorithm.App
             this.buttonAddTab = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.rbDijkstra = new System.Windows.Forms.RadioButton();
-            this.TabControl = new System.Windows.Forms.TabControl();
             this.gPage1 = new System.Windows.Forms.TabPage();
+            this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TapPageLogs = new System.Windows.Forms.TabPage();
+            this.TabPageMatrix = new System.Windows.Forms.TabPage();
+            this.TabControl = new System.Windows.Forms.TabControl();
+            this.gPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,6 +122,56 @@ namespace DijkstraAlgorithm.App
             this.rbDijkstra.Text = "Dijkstra\'s";
             this.rbDijkstra.UseVisualStyleBackColor = true;
             // 
+            // gPage1
+            // 
+            this.gPage1.Controls.Add(this.tabControl1);
+            this.gPage1.Controls.Add(this.PictureBoxGraph);
+            this.gPage1.Location = new System.Drawing.Point(4, 25);
+            this.gPage1.Name = "gPage1";
+            this.gPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.gPage1.Size = new System.Drawing.Size(1413, 646);
+            this.gPage1.TabIndex = 0;
+            this.gPage1.Text = "New Tab";
+            this.gPage1.UseVisualStyleBackColor = true;
+            // 
+            // PictureBoxGraph
+            // 
+            this.PictureBoxGraph.Location = new System.Drawing.Point(15, 15);
+            this.PictureBoxGraph.Name = "PictureBoxGraph";
+            this.PictureBoxGraph.Size = new System.Drawing.Size(645, 625);
+            this.PictureBoxGraph.TabIndex = 0;
+            this.PictureBoxGraph.TabStop = false;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.TabPageMatrix);
+            this.tabControl1.Controls.Add(this.TapPageLogs);
+            this.tabControl1.Location = new System.Drawing.Point(703, 15);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(645, 625);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // TapPageLogs
+            // 
+            this.TapPageLogs.Location = new System.Drawing.Point(4, 25);
+            this.TapPageLogs.Name = "TapPageLogs";
+            this.TapPageLogs.Padding = new System.Windows.Forms.Padding(3);
+            this.TapPageLogs.Size = new System.Drawing.Size(637, 596);
+            this.TapPageLogs.TabIndex = 1;
+            this.TapPageLogs.Text = "Логове";
+            this.TapPageLogs.UseVisualStyleBackColor = true;
+            // 
+            // TabPageMatrix
+            // 
+            this.TabPageMatrix.Location = new System.Drawing.Point(4, 25);
+            this.TabPageMatrix.Name = "TabPageMatrix";
+            this.TabPageMatrix.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageMatrix.Size = new System.Drawing.Size(637, 596);
+            this.TabPageMatrix.TabIndex = 0;
+            this.TabPageMatrix.Text = "Образуваща се матрица";
+            this.TabPageMatrix.UseVisualStyleBackColor = true;
+            // 
             // TabControl
             // 
             this.TabControl.Controls.Add(this.gPage1);
@@ -123,16 +180,6 @@ namespace DijkstraAlgorithm.App
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(1421, 675);
             this.TabControl.TabIndex = 3;
-            // 
-            // gPage1
-            // 
-            this.gPage1.Location = new System.Drawing.Point(4, 25);
-            this.gPage1.Name = "gPage1";
-            this.gPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.gPage1.Size = new System.Drawing.Size(1413, 646);
-            this.gPage1.TabIndex = 0;
-            this.gPage1.Text = "New Tab";
-            this.gPage1.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -152,6 +199,9 @@ namespace DijkstraAlgorithm.App
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dijkstra Algorithm App";
+            this.gPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,8 +217,12 @@ namespace DijkstraAlgorithm.App
         private System.Windows.Forms.Button buttonAddTab;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rbDijkstra;
-        private TabControl TabControl;
         private TabPage gPage1;
+        private TabControl tabControl1;
+        private TabPage TabPageMatrix;
+        private TabPage TapPageLogs;
+        private Visualization.CPictureBox PictureBoxGraph;
+        private TabControl TabControl;
     }
 }
 

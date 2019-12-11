@@ -59,11 +59,6 @@
         /// </summary>
         public void Remove(IVertex vertex)
         {
-            if (vertex == null)
-            {
-                throw new ArgumentNullException(nameof(vertex), ExceptionMessages.VertexCouldNotBeFound);
-            }
-
             var vertexToDelete = this.vertices
                 .FirstOrDefault(v => v.Id == vertex.Id);
 
@@ -132,12 +127,6 @@
             var vertex = this.vertices
                 .Where(v => v.X == x && v.Y == y)
                 .FirstOrDefault();
-
-            if (vertex == null)
-            {
-                throw new ArgumentNullException(nameof(vertex),
-                    ExceptionMessages.VertexCouldNotBeFound);
-            }
 
             return vertex;
         }
