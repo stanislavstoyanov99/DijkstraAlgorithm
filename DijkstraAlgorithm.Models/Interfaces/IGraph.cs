@@ -22,5 +22,7 @@
         void Remove(IVertex vertex);
 
         void Connect(IVertex firstVertex, IVertex secondVertex);
+
+        int VertexCount { get; }
     }
 }

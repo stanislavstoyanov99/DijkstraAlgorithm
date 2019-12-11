@@ -10,8 +10,8 @@
     using System.Windows.Forms;
     using Point = System.Drawing.Point;
 
-    using DijkstraAlgorithm.App.Interfaces;
     using DijkstraAlgorithm.Models;
+    using DijkstraAlgorithm.App.Interfaces;
     using DijkstraAlgorithm.Models.Interfaces;
     using System.ComponentModel;
     using System.Drawing.Design;
@@ -31,7 +31,7 @@
         // TODO
         public PictureBox PictureBoxMatrix { get; private set; }
 
-        public TabControl tabControl { get; set; }
+        public TabControl TabControl { get; set; }
 
         // TODO
         public TabPage TabPageMatrix { get; private set; }
@@ -52,54 +52,122 @@
 
             this.PictureBoxGraph.Paint += (sender, e) => Graph_OnPaint(sender, e, Graph);
             this.PictureBoxMatrix.Paint += (sender, e) => Matrix_OnPaint(sender, e, Graph);
+
+            this.PictureBoxGraph.MouseDown += delegate (object sender, MouseEventArgs e) 
+            {
+                int x = e.X / Vertex.CENTER_DIAMETER;
+                int y = e.Y / Vertex.CENTER_DIAMETER;
+
+                var vertex = Graph.GetVertex(x, y);
+
+                if (e.Button == MouseButtons.Left)
+                {
+                    if (vertex == null)
+                    {
+                        Graph.Add(new Vertex(Graph.VertexCount)
+                        {
+                            X = x,
+                            Y = y
+                        });
+                    }
+                    else
+                    {
+                        this.source = this.destination = vertex.Center;
+
+                        this.onHold = true;
+                    }
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+
+                    Graph.Remove(vertex);
+                }
+
+                PictureBoxGraph.Invalidate();
+                PictureBoxMatrix.Invalidate();
+            };
+
+            this.PictureBoxGraph.MouseUp += delegate (object sender, MouseEventArgs e) 
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    int sourceX = this.source.X / Vertex.CENTER_DIAMETER;
+                    int sourceY = this.source.Y / Vertex.CENTER_DIAMETER;
+
+                    int destinationX = this.destination.X / Vertex.CENTER_DIAMETER;
+                    int destinationY = this.destination.Y / Vertex.CENTER_DIAMETER;
+
+                    IVertex firstVertex = Graph.GetVertex(sourceX, sourceY);
+                    IVertex secondVertex = Graph.GetVertex(destinationX, destinationY);
+
+                    if (firstVertex != null && secondVertex != null && firstVertex != secondVertex && onHold)
+                    {
+                        Graph.Connect(firstVertex, secondVertex);
+                    }
+
+                    PictureBoxGraph.Invalidate();
+                    PictureBoxMatrix.Invalidate();
+                }
+
+                onHold = false;
+            };
+
+            this.PictureBoxGraph.MouseMove += delegate (object sender, MouseEventArgs e) 
+            {
+                if (onHold)
+                {
+                    this.destination = new Point(e.X, e.Y);
+                    PictureBoxGraph.Invalidate();
+                }
+            };
         }
 
         private void AddControls()
         {
-            var pbGraph = new CPictureBox()
+            this.PictureBoxGraph = new CPictureBox()
             {
                 Location = new Point(15, 15),
-                Size = new Size(510, 510)
+                Size = new Size(480, 480)
             };
 
-            this.Controls.Add(pbGraph);
+            this.Controls.Add(PictureBoxGraph);
 
-            tabControl = new TabControl()
+            TabControl = new TabControl()
             {
                 Location = new Point(531, 15),
-                Size = new Size(488, 510)
+                Size = new Size(480, 480)
             };
 
-            this.Controls.Add(tabControl);
+            this.Controls.Add(TabControl);
 
-            var tbMatrix = new TabPage("Образуваща се матрица")
+            this.TabPageMatrix = new TabPage("Образуваща се матрица")
             {
                 BackColor = Color.White
             };
 
-            this.tabControl.TabPages.Add(tbMatrix);
+            this.TabControl.TabPages.Add(TabPageMatrix);
 
-            var pbMatrix = new PictureBox()
+            this.PictureBoxMatrix = new PictureBox()
             {
                 Location = new Point(12, 18),
                 Size = new Size(480, 480)
             };
 
-            var rtbLogs = new RichTextBox()
+            this.TapPageLogs = new TabPage("Логове")
+            {
+                BackColor = Color.White
+            };
+
+            this.TabControl.TabPages.Add(TapPageLogs);
+
+            this.RichTextBoxLogs = new RichTextBox()
             {
                 Location = new Point(12, 12),
                 Size = new Size(450, 450)
             };
 
-            this.tabControl.TabPages[0].Controls.Add(pbMatrix);
-            this.tabControl.TabPages[1].Controls.Add(rtbLogs);
-
-            var tpLogs = new TabPage("Логове")
-            {
-                BackColor = Color.White
-            };
-
-            this.tabControl.TabPages.Add(tpLogs);
+            this.TabControl.TabPages[0].Controls.Add(PictureBoxMatrix);
+            this.TabControl.TabPages[1].Controls.Add(RichTextBoxLogs);
         }
 
         private void Graph_OnPaint(object sender, PaintEventArgs e, IGraph Graph)

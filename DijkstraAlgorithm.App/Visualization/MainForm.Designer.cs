@@ -38,9 +38,9 @@ namespace DijkstraAlgorithm.App
             this.buttonAddTab = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.rbDijkstra = new System.Windows.Forms.RadioButton();
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.gPage1 = new System.Windows.Forms.TabPage();
-            this.tabControl.SuspendLayout();
+            this.TabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // initialVertexId
@@ -74,7 +74,7 @@ namespace DijkstraAlgorithm.App
             // buttonCloseTab
             // 
             this.buttonCloseTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCloseTab.Location = new System.Drawing.Point(838, 25);
+            this.buttonCloseTab.Location = new System.Drawing.Point(1062, 27);
             this.buttonCloseTab.Name = "buttonCloseTab";
             this.buttonCloseTab.Size = new System.Drawing.Size(176, 41);
             this.buttonCloseTab.TabIndex = 2;
@@ -85,7 +85,7 @@ namespace DijkstraAlgorithm.App
             // buttonAddTab
             // 
             this.buttonAddTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddTab.Location = new System.Drawing.Point(1029, 25);
+            this.buttonAddTab.Location = new System.Drawing.Point(1276, 28);
             this.buttonAddTab.Name = "buttonAddTab";
             this.buttonAddTab.Size = new System.Drawing.Size(176, 40);
             this.buttonAddTab.TabIndex = 2;
@@ -115,21 +115,21 @@ namespace DijkstraAlgorithm.App
             this.rbDijkstra.Text = "Dijkstra\'s";
             this.rbDijkstra.UseVisualStyleBackColor = true;
             // 
-            // tabControl
+            // TabControl
             // 
-            this.tabControl.Controls.Add(this.gPage1);
-            this.tabControl.Location = new System.Drawing.Point(35, 132);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1170, 618);
-            this.tabControl.TabIndex = 3;
+            this.TabControl.Controls.Add(this.gPage1);
+            this.TabControl.Location = new System.Drawing.Point(35, 132);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(1421, 675);
+            this.TabControl.TabIndex = 3;
             // 
             // gPage1
             // 
             this.gPage1.Location = new System.Drawing.Point(4, 25);
             this.gPage1.Name = "gPage1";
             this.gPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.gPage1.Size = new System.Drawing.Size(1162, 589);
+            this.gPage1.Size = new System.Drawing.Size(1413, 646);
             this.gPage1.TabIndex = 0;
             this.gPage1.Text = "New Tab";
             this.gPage1.UseVisualStyleBackColor = true;
@@ -138,8 +138,8 @@ namespace DijkstraAlgorithm.App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1225, 762);
-            this.Controls.Add(this.tabControl);
+            this.ClientSize = new System.Drawing.Size(1491, 819);
+            this.Controls.Add(this.TabControl);
             this.Controls.Add(this.rbDijkstra);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonAddTab);
@@ -152,7 +152,7 @@ namespace DijkstraAlgorithm.App
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dijkstra Algorithm App";
-            this.tabControl.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,7 +167,7 @@ namespace DijkstraAlgorithm.App
         private System.Windows.Forms.Button buttonAddTab;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rbDijkstra;
-        private TabControl tabControl;
+        private TabControl TabControl;
         private TabPage gPage1;
     }
 }

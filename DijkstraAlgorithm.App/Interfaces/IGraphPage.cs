@@ -11,7 +11,7 @@
 
         PictureBox PictureBoxMatrix { get; }
 
-        TabControl tabControl { get; set; }
+        TabControl TabControl { get; set; }
 
         TabPage TabPageMatrix { get; }
 

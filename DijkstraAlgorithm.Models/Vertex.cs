@@ -7,9 +7,9 @@
 
     public class Vertex : IComparable, IVertex
     {
-        private const int CENTER_DIAMETER = 30;
+        public static int CENTER_DIAMETER = 30;
 
-        private const int CENTER_RADIUS = 15;
+        public static int CENTER_RADIUS = 15;
 
         public int Id { get; set; }
 

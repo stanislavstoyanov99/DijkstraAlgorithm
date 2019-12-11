@@ -25,13 +25,13 @@
 
         private void buttonAddTab_Click(object sender, EventArgs e)
         {
-            if (this.tabControl.TabCount < GRAPH_LIMIT)
+            if (this.TabControl.TabCount < GRAPH_LIMIT)
             {
                 var graph = new Graph();
                 var graphPage = new GraphPage(graph, "New Tab");
-                this.tabControl.TabPages.Add(graphPage);
+                this.TabControl.TabPages.Add(graphPage);
 
-                this.tabControl.SelectedIndex = this.tabControl.TabCount - 1;
+                this.TabControl.SelectedIndex = this.TabControl.TabCount - 1;
             }
             else
             {
@@ -41,11 +41,11 @@
 
         private void buttonCloseTab_Click(object sender, EventArgs e)
         {
-            if (this.tabControl.TabCount != 1)
+            if (this.TabControl.TabCount != 1)
             {
 
-                this.tabControl.TabPages.RemoveAt(this.tabControl.SelectedIndex);
-                this.tabControl.SelectedIndex = this.tabControl.TabCount - 1;
+                this.TabControl.TabPages.RemoveAt(this.TabControl.SelectedIndex);
+                this.TabControl.SelectedIndex = this.TabControl.TabCount - 1;
             }
             else
             {
