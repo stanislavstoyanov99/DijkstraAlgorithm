@@ -19,7 +19,7 @@
 
         bool Add(IVertex vertex);
 
-        void Remove(IVertex vertex);
+        bool Remove(IVertex vertex);
 
         void Connect(IVertex firstVertex, IVertex secondVertex);
 

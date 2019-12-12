@@ -16,6 +16,7 @@ namespace DijkstraAlgorithm.App.Visualization
     using DijkstraAlgorithm.Models.Interfaces;
 
     using static Models.Utilities.ConstantDelimeters;
+    using DijkstraAlgorithm.App.Utilities.Messages;
 
     public class GraphPage : TabPage, IGraphPage
     {
@@ -43,7 +44,7 @@ namespace DijkstraAlgorithm.App.Visualization
 
         public IGraph InvokeGraph { get; set; }
 
-        public GraphPage(IGraph Graph, string tabName)
+        public GraphPage(IGraph Graph, string tabName = null)
         {
             this.Text = tabName;
             this.BackColor = Color.White;
@@ -116,11 +117,16 @@ namespace DijkstraAlgorithm.App.Visualization
                 {
                     if (vertex == null)
                     {
-                        Graph.Add(new Vertex(Graph.VertexCount)
+                        bool result = Graph.Add(new Vertex(Graph.VertexCount)
                         {
                             X = x,
                             Y = y
                         });
+
+                        if (!result)
+                        {
+                            MessageBox.Show(OutputMessages.VertexLimitWarning, "Warning");
+                        }
                     }
                     else
                     {
@@ -131,7 +137,12 @@ namespace DijkstraAlgorithm.App.Visualization
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
-                    Graph.Remove(vertex);
+                    bool isRemoved = Graph.Remove(vertex);
+
+                    if (!isRemoved)
+                    {
+                        MessageBox.Show(OutputMessages.VertexCouldNotBeFound, "Warning");
+                    }
                 }
 
                 // Redraw the box graph and box matrix
@@ -150,7 +161,7 @@ namespace DijkstraAlgorithm.App.Visualization
 
             this.Controls.Add(PictureBoxGraph);
 
-            TabControl = new TabControl()
+            this.TabControl = new TabControl()
             {
                 Location = new Point(531, 15),
                 Size = new Size(480, 480)

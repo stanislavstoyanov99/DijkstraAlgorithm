@@ -59,14 +59,21 @@
         /// <summary>
         /// Removes vertex from graph, then sorts all vertices by ID and recalculates Ids
         /// </summary>
-        public void Remove(IVertex vertex)
+        public bool Remove(IVertex vertex)
         {
+            if (vertex == null)
+            {
+                return false;
+            }
+
+            bool isRemoved = true;
+
             var vertexToDelete = this.vertices
                 .FirstOrDefault(v => v.Id == vertex.Id);
 
             if (vertexToDelete == null)
             {
-                throw new ArgumentNullException(nameof(vertex), ExceptionMessages.VertexCouldNotBeFound);
+                isRemoved = false;
             }
 
             this.vertices.Remove(vertexToDelete);
@@ -79,6 +86,8 @@
 
             // Removes the connections of the already deleted vertex
             this.Disconnect(vertexToDelete);
+
+            return isRemoved;
         }
 
         /// <summary>

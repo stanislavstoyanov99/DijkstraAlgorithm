@@ -11,10 +11,8 @@
     {
         public int Id { get; set; }
 
-        // Does not set in constructor - why?
         public int X { get; set; }
 
-        // Does not set in constructor - why?
         public int Y { get; set; }
 
         // Does not set in constructor - why?

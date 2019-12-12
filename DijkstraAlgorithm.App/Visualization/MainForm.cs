@@ -43,7 +43,6 @@
         {
             if (this.TabControl.TabCount != 1)
             {
-
                 this.TabControl.TabPages.RemoveAt(this.TabControl.SelectedIndex);
                 this.TabControl.SelectedIndex = this.TabControl.TabCount - 1;
             }
