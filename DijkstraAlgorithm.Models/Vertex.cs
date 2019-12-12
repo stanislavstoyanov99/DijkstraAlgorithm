@@ -5,12 +5,10 @@
 
     using DijkstraAlgorithm.Models.Interfaces;
 
+    using static Utilities.ConstantDelimeters;
+
     public class Vertex : IComparable, IVertex
     {
-        public static int CENTER_DIAMETER = 30;
-
-        public static int CENTER_RADIUS = 15;
-
         public int Id { get; set; }
 
         // Does not set in constructor - why?
@@ -40,19 +38,20 @@
         /// Returns center point of a Vertex
         /// </summary>
         public Point Center =>
-            new Point(this.X * CENTER_DIAMETER + CENTER_RADIUS, this.Y * CENTER_DIAMETER + CENTER_RADIUS);
+            new Point(this.X * VertexConstants.CENTER_DIAMETER + VertexConstants.CENTER_RADIUS,
+                this.Y * VertexConstants.CENTER_DIAMETER + VertexConstants.CENTER_RADIUS);
 
         /// <summary>
         /// Returns location point of a Vertex
         /// </summary>
         public Point Location =>
-            new Point(this.X * CENTER_DIAMETER, this.Y * CENTER_DIAMETER);
+            new Point(this.X * VertexConstants.CENTER_DIAMETER, this.Y * VertexConstants.CENTER_DIAMETER);
 
         /// <summary>
         /// Returns default size of a Vertex
         /// </summary>
         public Size Size =>
-            new Size(CENTER_DIAMETER, CENTER_DIAMETER);
+            new Size(VertexConstants.CENTER_DIAMETER, VertexConstants.CENTER_DIAMETER);
 
         public int CompareTo(object obj)
         {

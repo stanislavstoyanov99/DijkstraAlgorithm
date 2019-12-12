@@ -8,6 +8,8 @@
     using DijkstraAlgorithm.Models.Interfaces;
     using DijkstraAlgorithm.Models.Utilities.Messages;
 
+    using static Utilities.ConstantDelimeters;
+
     public class Graph : IEnumerable<IVertex>, IGraph
     {
         private const int VERTEX_LIMIT = 14;
@@ -89,7 +91,7 @@
                 if ((edge[0] == firstVertex && edge[1] == secondVertex) ||
                     edge[0] == secondVertex && edge[1] == firstVertex)
                 {
-                    edge.Weight += Edge.INITIAL_WEIGHT;
+                    edge.Weight += EdgeConstants.INITIAL_WEIGHT;
 
                     return;
                 }

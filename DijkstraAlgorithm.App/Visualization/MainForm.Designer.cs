@@ -39,14 +39,14 @@ namespace DijkstraAlgorithm.App
             this.label1 = new System.Windows.Forms.Label();
             this.rbDijkstra = new System.Windows.Forms.RadioButton();
             this.gPage1 = new System.Windows.Forms.TabPage();
-            this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.TapPageLogs = new System.Windows.Forms.TabPage();
             this.TabPageMatrix = new System.Windows.Forms.TabPage();
+            this.TapPageLogs = new System.Windows.Forms.TabPage();
+            this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.gPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).BeginInit();
             this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).BeginInit();
             this.TabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -134,14 +134,6 @@ namespace DijkstraAlgorithm.App
             this.gPage1.Text = "New Tab";
             this.gPage1.UseVisualStyleBackColor = true;
             // 
-            // PictureBoxGraph
-            // 
-            this.PictureBoxGraph.Location = new System.Drawing.Point(15, 15);
-            this.PictureBoxGraph.Name = "PictureBoxGraph";
-            this.PictureBoxGraph.Size = new System.Drawing.Size(645, 625);
-            this.PictureBoxGraph.TabIndex = 0;
-            this.PictureBoxGraph.TabStop = false;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.TabPageMatrix);
@@ -151,6 +143,16 @@ namespace DijkstraAlgorithm.App
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(645, 625);
             this.tabControl1.TabIndex = 1;
+            // 
+            // TabPageMatrix
+            // 
+            this.TabPageMatrix.Location = new System.Drawing.Point(4, 25);
+            this.TabPageMatrix.Name = "TabPageMatrix";
+            this.TabPageMatrix.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageMatrix.Size = new System.Drawing.Size(637, 596);
+            this.TabPageMatrix.TabIndex = 0;
+            this.TabPageMatrix.Text = "Образуваща се матрица";
+            this.TabPageMatrix.UseVisualStyleBackColor = true;
             // 
             // TapPageLogs
             // 
@@ -162,15 +164,13 @@ namespace DijkstraAlgorithm.App
             this.TapPageLogs.Text = "Логове";
             this.TapPageLogs.UseVisualStyleBackColor = true;
             // 
-            // TabPageMatrix
+            // PictureBoxGraph
             // 
-            this.TabPageMatrix.Location = new System.Drawing.Point(4, 25);
-            this.TabPageMatrix.Name = "TabPageMatrix";
-            this.TabPageMatrix.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageMatrix.Size = new System.Drawing.Size(637, 596);
-            this.TabPageMatrix.TabIndex = 0;
-            this.TabPageMatrix.Text = "Образуваща се матрица";
-            this.TabPageMatrix.UseVisualStyleBackColor = true;
+            this.PictureBoxGraph.Location = new System.Drawing.Point(15, 15);
+            this.PictureBoxGraph.Name = "PictureBoxGraph";
+            this.PictureBoxGraph.Size = new System.Drawing.Size(645, 625);
+            this.PictureBoxGraph.TabIndex = 0;
+            this.PictureBoxGraph.TabStop = false;
             // 
             // TabControl
             // 
@@ -200,8 +200,8 @@ namespace DijkstraAlgorithm.App
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dijkstra Algorithm App";
             this.gPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).EndInit();
             this.TabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

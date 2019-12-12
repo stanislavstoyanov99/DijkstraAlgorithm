@@ -1,4 +1,5 @@
-﻿namespace DijkstraAlgorithm.App.Visualization
+﻿
+namespace DijkstraAlgorithm.App.Visualization
 {
     using System;
     using System.Collections.Generic;
@@ -13,8 +14,8 @@
     using DijkstraAlgorithm.Models;
     using DijkstraAlgorithm.App.Interfaces;
     using DijkstraAlgorithm.Models.Interfaces;
-    using System.ComponentModel;
-    using System.Drawing.Design;
+
+    using static Models.Utilities.ConstantDelimeters;
 
     public class GraphPage : TabPage, IGraphPage
     {
@@ -53,13 +54,64 @@
             this.PictureBoxGraph.Paint += (sender, e) => Graph_OnPaint(sender, e, Graph);
             this.PictureBoxMatrix.Paint += (sender, e) => Matrix_OnPaint(sender, e, Graph);
 
-            this.PictureBoxGraph.MouseDown += delegate (object sender, MouseEventArgs e) 
+            Mouse_Down(Graph);
+            Mouse_Up(Graph);
+            Mouse_Move();
+        }
+
+        private void Mouse_Move()
+        {
+            this.PictureBoxGraph.MouseMove += delegate (object sender, MouseEventArgs e)
             {
-                int x = e.X / Vertex.CENTER_DIAMETER;
-                int y = e.Y / Vertex.CENTER_DIAMETER;
+                if (onHold)
+                {
+                    this.destination = new Point(e.X, e.Y);
+
+                    // Redraw graph box
+                    PictureBoxGraph.Invalidate();
+                }
+            };
+        }
+
+        private void Mouse_Up(IGraph Graph)
+        {
+            this.PictureBoxGraph.MouseUp += delegate (object sender, MouseEventArgs e)
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    int sourceX = this.source.X / VertexConstants.CENTER_DIAMETER;
+                    int sourceY = this.source.Y / VertexConstants.CENTER_DIAMETER;
+
+                    int destinationX = this.destination.X / VertexConstants.CENTER_DIAMETER;
+                    int destinationY = this.destination.Y / VertexConstants.CENTER_DIAMETER;
+
+                    IVertex firstVertex = Graph.GetVertex(sourceX, sourceY);
+                    IVertex secondVertex = Graph.GetVertex(destinationX, destinationY);
+
+                    if (firstVertex != null && secondVertex != null && firstVertex != secondVertex && onHold)
+                    {
+                        Graph.Connect(firstVertex, secondVertex);
+                    }
+
+                    // Redraw graph box and matrix box
+                    PictureBoxGraph.Invalidate();
+                    PictureBoxMatrix.Invalidate();
+                }
+
+                onHold = false;
+            };
+        }
+
+        private void Mouse_Down(IGraph Graph)
+        {
+            this.PictureBoxGraph.MouseDown += delegate (object sender, MouseEventArgs e)
+            {
+                int x = e.X / VertexConstants.CENTER_DIAMETER;
+                int y = e.Y / VertexConstants.CENTER_DIAMETER;
 
                 var vertex = Graph.GetVertex(x, y);
 
+                // With left button - adds vertex; with right button - removes it
                 if (e.Button == MouseButtons.Left)
                 {
                     if (vertex == null)
@@ -79,46 +131,12 @@
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
-
                     Graph.Remove(vertex);
                 }
 
+                // Redraw the box graph and box matrix
                 PictureBoxGraph.Invalidate();
                 PictureBoxMatrix.Invalidate();
-            };
-
-            this.PictureBoxGraph.MouseUp += delegate (object sender, MouseEventArgs e) 
-            {
-                if (e.Button == MouseButtons.Left)
-                {
-                    int sourceX = this.source.X / Vertex.CENTER_DIAMETER;
-                    int sourceY = this.source.Y / Vertex.CENTER_DIAMETER;
-
-                    int destinationX = this.destination.X / Vertex.CENTER_DIAMETER;
-                    int destinationY = this.destination.Y / Vertex.CENTER_DIAMETER;
-
-                    IVertex firstVertex = Graph.GetVertex(sourceX, sourceY);
-                    IVertex secondVertex = Graph.GetVertex(destinationX, destinationY);
-
-                    if (firstVertex != null && secondVertex != null && firstVertex != secondVertex && onHold)
-                    {
-                        Graph.Connect(firstVertex, secondVertex);
-                    }
-
-                    PictureBoxGraph.Invalidate();
-                    PictureBoxMatrix.Invalidate();
-                }
-
-                onHold = false;
-            };
-
-            this.PictureBoxGraph.MouseMove += delegate (object sender, MouseEventArgs e) 
-            {
-                if (onHold)
-                {
-                    this.destination = new Point(e.X, e.Y);
-                    PictureBoxGraph.Invalidate();
-                }
             };
         }
 
@@ -177,7 +195,7 @@
             // Drag & Drop Connection Line Reconstruction
             if (this.onHold)
             {
-                var pen = new Pen(Color.IndianRed, 2)
+                var pen = new Pen(Color.DarkBlue, 2)
                 {
                     DashPattern = new[]
                     {
@@ -193,7 +211,7 @@
                 float y = 0.5f * (source.Y + destination.Y);
 
                 e.Graphics.DrawLine(pen, source, destination);
-                e.Graphics.DrawString(Edge.INITIAL_WEIGHT.ToString(), this.Font, brush, x, y);
+                e.Graphics.DrawString(EdgeConstants.INITIAL_WEIGHT.ToString(), this.Font, brush, x, y);
             }
 
             // Connection Line Reconstruction

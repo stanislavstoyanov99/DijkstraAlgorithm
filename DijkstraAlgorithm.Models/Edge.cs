@@ -3,18 +3,19 @@
     using System;
 
     using DijkstraAlgorithm.Models.Interfaces;
+    using DijkstraAlgorithm.Models.Utilities;
     using DijkstraAlgorithm.Models.Utilities.Messages;
+
+    using static Utilities.ConstantDelimeters;
 
     public class Edge : IEdge
     {
-        public static int INITIAL_WEIGHT = 1;
-
         public Edge(IVertex FirstVertex, IVertex SecondVertex)
         {
             this.FirstVertex = FirstVertex;
             this.SecondVertex = SecondVertex;
 
-            this.Weight = INITIAL_WEIGHT;
+            this.Weight = EdgeConstants.INITIAL_WEIGHT;
         }
 
         public IVertex FirstVertex { get; set; }
