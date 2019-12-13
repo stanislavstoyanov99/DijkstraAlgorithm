@@ -14,10 +14,10 @@
     using DijkstraAlgorithm.App.Visualization;
     using DijkstraAlgorithm.App.Utilities.Messages;
 
+    using static Models.Utilities.ConstantDelimeters;
+
     public partial class MainForm : Form
     {
-        public const int GRAPH_LIMIT = 15;
-
         public MainForm()
         {
             InitializeComponent();
@@ -25,17 +25,18 @@
 
         private void buttonAddTab_Click(object sender, EventArgs e)
         {
-            if (this.TabControl.TabCount < GRAPH_LIMIT)
+            var graph = new Graph();
+            var graphPage = new GraphPage(graph, "New Tab");
+
+            if (this.TabControl.TabCount < GraphConstants.GRAPH_LIMIT)
             {
-                var graph = new Graph();
-                var graphPage = new GraphPage(graph, "New Tab");
                 this.TabControl.TabPages.Add(graphPage);
 
-                this.TabControl.SelectedIndex = this.TabControl.TabCount - 1;
+                this.TabControl.SelectedIndex = graphPage.TabControl.TabCount - 1;
             }
             else
             {
-                MessageBox.Show(string.Format(OutputMessages.TabLimitWarning, GRAPH_LIMIT), "Warning");
+                MessageBox.Show(string.Format(OutputMessages.TabLimitWarning, GraphConstants.GRAPH_LIMIT), "Warning");
             }
         }
 
@@ -59,3 +60,4 @@
         }
     }
 }
+
