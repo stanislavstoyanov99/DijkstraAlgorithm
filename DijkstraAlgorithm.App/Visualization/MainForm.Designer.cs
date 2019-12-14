@@ -40,15 +40,17 @@ namespace DijkstraAlgorithm.App
             this.rbDijkstra = new System.Windows.Forms.RadioButton();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.gPage = new System.Windows.Forms.TabPage();
+            this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TapPageMatrix = new System.Windows.Forms.TabPage();
             this.pageNameTextbox = new System.Windows.Forms.TextBox();
             this.pageNamelabel = new System.Windows.Forms.Label();
-            this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
+            this.loadButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.gPage.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // initialVertexId
@@ -144,6 +146,17 @@ namespace DijkstraAlgorithm.App
             this.gPage.Text = "Примерен граф";
             this.gPage.UseVisualStyleBackColor = true;
             // 
+            // PictureBoxGraph
+            // 
+            this.PictureBoxGraph.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBoxGraph.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxGraph.BackgroundImage")));
+            this.PictureBoxGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PictureBoxGraph.Location = new System.Drawing.Point(16, 24);
+            this.PictureBoxGraph.Name = "PictureBoxGraph";
+            this.PictureBoxGraph.Size = new System.Drawing.Size(685, 584);
+            this.PictureBoxGraph.TabIndex = 1;
+            this.PictureBoxGraph.TabStop = false;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.TapPageMatrix);
@@ -183,16 +196,27 @@ namespace DijkstraAlgorithm.App
             this.pageNamelabel.TabIndex = 6;
             this.pageNamelabel.Text = "Име на страница:";
             // 
-            // PictureBoxGraph
+            // loadButton
             // 
-            this.PictureBoxGraph.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBoxGraph.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxGraph.BackgroundImage")));
-            this.PictureBoxGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PictureBoxGraph.Location = new System.Drawing.Point(16, 24);
-            this.PictureBoxGraph.Name = "PictureBoxGraph";
-            this.PictureBoxGraph.Size = new System.Drawing.Size(685, 584);
-            this.PictureBoxGraph.TabIndex = 1;
-            this.PictureBoxGraph.TabStop = false;
+            this.loadButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadButton.Location = new System.Drawing.Point(1062, 82);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(176, 40);
+            this.loadButton.TabIndex = 7;
+            this.loadButton.Text = "Load graph";
+            this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(1272, 82);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(176, 40);
+            this.saveButton.TabIndex = 8;
+            this.saveButton.Text = "Save graph";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // MainForm
             // 
@@ -200,6 +224,8 @@ namespace DijkstraAlgorithm.App
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1491, 819);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.loadButton);
             this.Controls.Add(this.pageNamelabel);
             this.Controls.Add(this.pageNameTextbox);
             this.Controls.Add(this.TabControl);
@@ -217,8 +243,8 @@ namespace DijkstraAlgorithm.App
             this.Text = "Dijkstra Algorithm App";
             this.TabControl.ResumeLayout(false);
             this.gPage.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -240,6 +266,8 @@ namespace DijkstraAlgorithm.App
         private TabControl TabControl;
         private TextBox pageNameTextbox;
         private Label pageNamelabel;
+        private Button loadButton;
+        private Button saveButton;
     }
 }
 

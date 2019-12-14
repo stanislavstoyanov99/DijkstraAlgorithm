@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DijkstraAlgorithm.Models", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DijkstraAlgorithm.App", "DijkstraAlgorithm.App\DijkstraAlgorithm.App.csproj", "{B21C473B-7E35-4CAA-A36D-7E3FDBC7C89E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DijkstraAlgorithm.InputOutput", "DijkstraAlgorithm.InputOutput\DijkstraAlgorithm.InputOutput.csproj", "{FE7717BF-402E-4BB9-80B2-CB220849050E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B21C473B-7E35-4CAA-A36D-7E3FDBC7C89E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B21C473B-7E35-4CAA-A36D-7E3FDBC7C89E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B21C473B-7E35-4CAA-A36D-7E3FDBC7C89E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE7717BF-402E-4BB9-80B2-CB220849050E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE7717BF-402E-4BB9-80B2-CB220849050E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE7717BF-402E-4BB9-80B2-CB220849050E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE7717BF-402E-4BB9-80B2-CB220849050E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

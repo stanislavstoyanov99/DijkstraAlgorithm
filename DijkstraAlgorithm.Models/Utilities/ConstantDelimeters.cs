@@ -16,7 +16,7 @@
 
         public static class GraphConstants
         {
-            public const int GRAPH_LIMIT = 15;
+            public const int GRAPH_LIMIT = 16;
         }
     }
 }

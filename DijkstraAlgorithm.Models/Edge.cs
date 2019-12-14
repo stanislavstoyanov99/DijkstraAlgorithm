@@ -3,7 +3,6 @@
     using System;
 
     using DijkstraAlgorithm.Models.Interfaces;
-    using DijkstraAlgorithm.Models.Utilities;
     using DijkstraAlgorithm.Models.Utilities.Messages;
 
     using static Utilities.ConstantDelimeters;
