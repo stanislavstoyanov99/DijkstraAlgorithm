@@ -15,6 +15,7 @@
     using DijkstraAlgorithm.App.Utilities.Messages;
 
     using static Models.Utilities.ConstantDelimeters;
+    using System.Text.RegularExpressions;
 
     public partial class MainForm : Form
     {
@@ -26,7 +27,21 @@
         private void buttonAddTab_Click(object sender, EventArgs e)
         {
             var graph = new Graph();
-            var graphPage = new GraphPage(graph, "New Tab");
+            var graphPage = new GraphPage(graph);
+
+            string tabName = pageNameTextbox.Text;
+
+            if (Regex.IsMatch(tabName, "^[0-9]+$"))
+            {
+                MessageBox.Show(OutputMessages.InvalidTabName, "Warning");
+                pageNameTextbox.ResetText();
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(tabName))
+            {
+                graphPage.Text = tabName;
+            }
 
             if (this.TabControl.TabCount < GraphConstants.GRAPH_LIMIT)
             {
@@ -38,6 +53,8 @@
             {
                 MessageBox.Show(string.Format(OutputMessages.TabLimitWarning, GraphConstants.GRAPH_LIMIT), "Warning");
             }
+
+            pageNameTextbox.ResetText();
         }
 
         private void buttonCloseTab_Click(object sender, EventArgs e)

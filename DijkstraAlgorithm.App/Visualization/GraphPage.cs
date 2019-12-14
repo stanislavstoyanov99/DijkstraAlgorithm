@@ -44,7 +44,7 @@ namespace DijkstraAlgorithm.App.Visualization
 
         public IGraph InvokeGraph { get; set; }
 
-        public GraphPage(IGraph Graph, string tabName = null)
+        public GraphPage(IGraph Graph, string tabName = "New tab")
         {
             this.Text = tabName;
             this.BackColor = Color.White;
@@ -210,10 +210,10 @@ namespace DijkstraAlgorithm.App.Visualization
                 {
                     DashPattern = new[]
                     {
-                        2f,
-                        2f,
-                        2f,
-                        2f
+                        4f,
+                        4f,
+                        4f,
+                        4f
                     },
                 };
 

@@ -42,7 +42,8 @@ namespace DijkstraAlgorithm.App
             this.gPage = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TapPageMatrix = new System.Windows.Forms.TabPage();
-            this.TapPageLogs = new System.Windows.Forms.TabPage();
+            this.pageNameTextbox = new System.Windows.Forms.TextBox();
+            this.pageNamelabel = new System.Windows.Forms.Label();
             this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
             this.TabControl.SuspendLayout();
             this.gPage.SuspendLayout();
@@ -92,7 +93,7 @@ namespace DijkstraAlgorithm.App
             // buttonAddTab
             // 
             this.buttonAddTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddTab.Location = new System.Drawing.Point(1276, 28);
+            this.buttonAddTab.Location = new System.Drawing.Point(1272, 28);
             this.buttonAddTab.Name = "buttonAddTab";
             this.buttonAddTab.Size = new System.Drawing.Size(176, 40);
             this.buttonAddTab.TabIndex = 2;
@@ -114,7 +115,7 @@ namespace DijkstraAlgorithm.App
             // 
             this.rbDijkstra.AutoSize = true;
             this.rbDijkstra.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbDijkstra.Location = new System.Drawing.Point(198, 82);
+            this.rbDijkstra.Location = new System.Drawing.Point(197, 80);
             this.rbDijkstra.Name = "rbDijkstra";
             this.rbDijkstra.Size = new System.Drawing.Size(101, 24);
             this.rbDijkstra.TabIndex = 4;
@@ -125,7 +126,6 @@ namespace DijkstraAlgorithm.App
             // TabControl
             // 
             this.TabControl.Controls.Add(this.gPage);
-            this.TabControl.Enabled = false;
             this.TabControl.Location = new System.Drawing.Point(35, 149);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
@@ -147,7 +147,6 @@ namespace DijkstraAlgorithm.App
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.TapPageMatrix);
-            this.tabControl1.Controls.Add(this.TapPageLogs);
             this.tabControl1.Location = new System.Drawing.Point(735, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -156,6 +155,8 @@ namespace DijkstraAlgorithm.App
             // 
             // TapPageMatrix
             // 
+            this.TapPageMatrix.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TapPageMatrix.BackgroundImage")));
+            this.TapPageMatrix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.TapPageMatrix.Location = new System.Drawing.Point(4, 25);
             this.TapPageMatrix.Name = "TapPageMatrix";
             this.TapPageMatrix.Padding = new System.Windows.Forms.Padding(3);
@@ -164,15 +165,23 @@ namespace DijkstraAlgorithm.App
             this.TapPageMatrix.Text = "Образуваща се матрица";
             this.TapPageMatrix.UseVisualStyleBackColor = true;
             // 
-            // TapPageLogs
+            // pageNameTextbox
             // 
-            this.TapPageLogs.Location = new System.Drawing.Point(4, 25);
-            this.TapPageLogs.Name = "TapPageLogs";
-            this.TapPageLogs.Padding = new System.Windows.Forms.Padding(3);
-            this.TapPageLogs.Size = new System.Drawing.Size(643, 559);
-            this.TapPageLogs.TabIndex = 1;
-            this.TapPageLogs.Text = "Логове";
-            this.TapPageLogs.UseVisualStyleBackColor = true;
+            this.pageNameTextbox.Location = new System.Drawing.Point(840, 35);
+            this.pageNameTextbox.MaxLength = 100;
+            this.pageNameTextbox.Name = "pageNameTextbox";
+            this.pageNameTextbox.Size = new System.Drawing.Size(129, 22);
+            this.pageNameTextbox.TabIndex = 1;
+            // 
+            // pageNamelabel
+            // 
+            this.pageNamelabel.AutoSize = true;
+            this.pageNamelabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pageNamelabel.Location = new System.Drawing.Point(670, 38);
+            this.pageNamelabel.Name = "pageNamelabel";
+            this.pageNamelabel.Size = new System.Drawing.Size(156, 20);
+            this.pageNamelabel.TabIndex = 6;
+            this.pageNamelabel.Text = "Име на страница:";
             // 
             // PictureBoxGraph
             // 
@@ -189,7 +198,10 @@ namespace DijkstraAlgorithm.App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1491, 819);
+            this.Controls.Add(this.pageNamelabel);
+            this.Controls.Add(this.pageNameTextbox);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.rbDijkstra);
             this.Controls.Add(this.label1);
@@ -224,9 +236,10 @@ namespace DijkstraAlgorithm.App
         private TabPage gPage;
         private TabControl tabControl1;
         private TabPage TapPageMatrix;
-        private TabPage TapPageLogs;
         private Visualization.CPictureBox PictureBoxGraph;
         private TabControl TabControl;
+        private TextBox pageNameTextbox;
+        private Label pageNamelabel;
     }
 }
 

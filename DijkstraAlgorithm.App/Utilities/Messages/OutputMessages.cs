@@ -9,5 +9,7 @@
         public const string VertexLimitWarning = "Vertex limit reached!";
 
         public const string VertexCouldNotBeFound = "The requested vertex could not be found.";
+
+        public const string InvalidTabName = "Tab name should consist only lower or uppercase letters.";
     }
 }
