@@ -17,6 +17,7 @@
         public static class GraphConstants
         {
             public const int GRAPH_LIMIT = 16;
+            public const int VERTEX_LIMIT = 13;
         }
 
         public static class MatrixConstants

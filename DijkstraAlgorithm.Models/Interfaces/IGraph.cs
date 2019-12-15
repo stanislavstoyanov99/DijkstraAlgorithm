@@ -13,6 +13,8 @@
 
         IReadOnlyCollection<IEdge> Edges { get; }
 
+        IVertex this[int index] { get; }
+
         IEdge GetEdge(IVertex firstVertex, IVertex secondVertex);
 
         IVertex GetVertex(int x, int y);

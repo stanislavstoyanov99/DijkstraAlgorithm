@@ -59,6 +59,9 @@ namespace DijkstraAlgorithm.App.Visualization
             Mouse_Down(Graph);
             Mouse_Up(Graph);
             Mouse_Move();
+
+            Mouse_Down_Matrix(Graph);
+            Mouse_Move_Matrix();
         }
 
         private void Mouse_Move()
@@ -152,6 +155,56 @@ namespace DijkstraAlgorithm.App.Visualization
             };
         }
 
+        private void Mouse_Down_Matrix(IGraph Graph)
+        {
+            this.PictureBoxMatrix.MouseDown += delegate (object sender, MouseEventArgs e)
+            {
+                int row = e.X / VertexConstants.CENTER_DIAMETER - 1;
+                int col = e.Y / VertexConstants.CENTER_DIAMETER - 1;
+
+                if (row != col && row < Graph.VertexCount && col < Graph.VertexCount && row > -1 && col > -1)
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        Graph.Connect(Graph[row], Graph[col]);
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        IEdge edge = Graph.GetEdge(Graph[row], Graph[col]);
+
+                        if (edge != null && edge.Weight > 0)
+                        {
+                            if (edge.Weight - 1 == 0)
+                            {
+                                //break capsulation rule
+                                //Graph.Edges.Remove(edge);
+                            }
+                            else
+                            {
+                                edge.Weight--;
+                            }
+                        }
+
+                        PictureBoxMatrix.Invalidate();
+                        PictureBoxGraph.Invalidate();
+                    }
+                }
+            };
+        }
+
+        private void Mouse_Move_Matrix()
+        {
+            this.PictureBoxMatrix.MouseMove += delegate (object sender, MouseEventArgs e)
+            {
+                int x = e.Location.X / VertexConstants.CENTER_DIAMETER * VertexConstants.CENTER_DIAMETER;
+                int y = e.Location.Y / VertexConstants.CENTER_DIAMETER * VertexConstants.CENTER_DIAMETER;
+
+                this.matrixHoverPoint = new Point(x, y);
+
+                this.PictureBoxMatrix.Invalidate();
+            };
+        }
+
         private void AddControls()
         {
             this.PictureBoxGraph = new CPictureBox()
@@ -193,8 +246,10 @@ namespace DijkstraAlgorithm.App.Visualization
             this.RichTextBoxLogs = new RichTextBox()
             {
                 Location = new Point(12, 12),
-                Size = new Size(450, 450)
+                Size = new Size(440, 440)
             };
+
+            this.RichTextBoxLogs.ReadOnly = true;
 
             this.TabControl.TabPages[0].Controls.Add(PictureBoxMatrix);
             this.TabControl.TabPages[1].Controls.Add(RichTextBoxLogs);
@@ -267,7 +322,6 @@ namespace DijkstraAlgorithm.App.Visualization
             }
         }
 
-        // TODO
         private void Matrix_OnPaint(object sender, PaintEventArgs e, IGraph Graph)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -324,6 +378,7 @@ namespace DijkstraAlgorithm.App.Visualization
                         MatrixConstants.MATRIX_GRID_WEIGHT,
                         MatrixConstants.MATRIX_GRID_HEIGHT);
 
+                    // Ensure there isn't any loop on matrix diagonal
                     if (row == col)
                     {
                         var fontConsolas = new Font("Consolas", 10, FontStyle.Regular);
@@ -333,9 +388,9 @@ namespace DijkstraAlgorithm.App.Visualization
 
                     foreach (IEdge edge in Graph.Edges)
                     {
-                        if ((edge[0].id == row && edge[1].id == col) || (edge[0].id == col && edge[1].id == row))
+                        if ((edge[0].Id == row && edge[1].Id == col) || (edge[0].Id == col && edge[1].Id == row))
                         {
-                            e.Graphics.DrawString(string.Format("{0,2}", edge.cost), this.Font, new SolidBrush(Color.Black), x + 6, y + 9);
+                            e.Graphics.DrawString(string.Format("{0,2}", edge.Weight), this.Font, solidBrush, x + 6, y + 9);
                         }
                     }
 

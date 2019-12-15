@@ -12,8 +12,6 @@
 
     public class Graph : IEnumerable<IVertex>, IGraph
     {
-        private const int VERTEX_LIMIT = 14;
-
         public List<IVertex> vertices;
 
         public List<IEdge> edges;
@@ -44,7 +42,7 @@
 
         public bool Add(IVertex vertex)
         {
-            if (this.VertexCount < VERTEX_LIMIT)
+            if (this.VertexCount < GraphConstants.VERTEX_LIMIT)
             {
                 this.vertices.Add(vertex);
 
