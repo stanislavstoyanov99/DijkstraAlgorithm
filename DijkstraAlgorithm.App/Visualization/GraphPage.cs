@@ -15,8 +15,9 @@ namespace DijkstraAlgorithm.App.Visualization
     using DijkstraAlgorithm.App.Interfaces;
     using DijkstraAlgorithm.Models.Interfaces;
 
-    using static Models.Utilities.ConstantDelimeters;
     using DijkstraAlgorithm.App.Utilities.Messages;
+
+    using static Models.Utilities.ConstantDelimeters;
 
     public class GraphPage : TabPage, IGraphPage
     {
@@ -269,7 +270,81 @@ namespace DijkstraAlgorithm.App.Visualization
         // TODO
         private void Matrix_OnPaint(object sender, PaintEventArgs e, IGraph Graph)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
+            // Grid Hover Highlight
+            if (matrixHoverPoint.X > 0 && matrixHoverPoint.Y > 0 &&
+                (matrixHoverPoint.X / VertexConstants.CENTER_DIAMETER) <= Graph.VertexCount &&
+                matrixHoverPoint.Y / VertexConstants.CENTER_DIAMETER <= Graph.VertexCount)
+            {
+                var brush = new SolidBrush(Color.WhiteSmoke);
+
+                e.Graphics.FillRectangle(brush,
+                    matrixHoverPoint.X,
+                    matrixHoverPoint.Y,
+                    MatrixConstants.MATRIX_GRID_WEIGHT,
+                    MatrixConstants.MATRIX_GRID_HEIGHT);
+            }
+
+            // Horizonal Label Reconstruction
+            var font = new Font("Roboto Condensed", 9, FontStyle.Italic);
+            var solidBrush = new SolidBrush(Color.Black);
+
+            int x = MatrixConstants.MATRIX_GRID_WEIGHT, y = 0;
+
+            for (int i = 0; i < Graph.VertexCount; i++)
+            {
+                e.Graphics.DrawString(string.Format("{0,2}", i + 1), font, solidBrush, x + 7, y);
+
+                x += MatrixConstants.MATRIX_GRID_WEIGHT;
+            }
+
+            // Vertical Label Reconstruction
+            x = 0; y = MatrixConstants.MATRIX_GRID_HEIGHT;
+
+            for (int i = 0; i < Graph.VertexCount; i++)
+            {
+                e.Graphics.DrawString(string.Format("{0,2}", i + 1), font, solidBrush, x, y + 7);
+
+                y += MatrixConstants.MATRIX_GRID_HEIGHT;
+            }
+
+            // Matrix reconstruction
+            x = MatrixConstants.MATRIX_GRID_WEIGHT; y = MatrixConstants.MATRIX_GRID_HEIGHT;
+
+            for (int row = 0; row < Graph.VertexCount; row++)
+            {
+                for (int col = 0; col < Graph.VertexCount; col++)
+                {
+                    var pen = new Pen(SystemColors.ActiveBorder, 1);
+
+                    e.Graphics.DrawRectangle(pen,
+                        x,
+                        y,
+                        MatrixConstants.MATRIX_GRID_WEIGHT,
+                        MatrixConstants.MATRIX_GRID_HEIGHT);
+
+                    if (row == col)
+                    {
+                        var fontConsolas = new Font("Consolas", 10, FontStyle.Regular);
+
+                        e.Graphics.DrawString(string.Format("{0,2}", "-"), fontConsolas, solidBrush, x + 2, y + 7);
+                    }
+
+                    foreach (IEdge edge in Graph.Edges)
+                    {
+                        if ((edge[0].id == row && edge[1].id == col) || (edge[0].id == col && edge[1].id == row))
+                        {
+                            e.Graphics.DrawString(string.Format("{0,2}", edge.cost), this.Font, new SolidBrush(Color.Black), x + 6, y + 9);
+                        }
+                    }
+
+                    x += MatrixConstants.MATRIX_GRID_WEIGHT;
+                }
+
+                x = MatrixConstants.MATRIX_GRID_WEIGHT;
+                y += MatrixConstants.MATRIX_GRID_HEIGHT;
+            }
         }
     }
 }

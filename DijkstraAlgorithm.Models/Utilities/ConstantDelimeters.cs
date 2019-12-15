@@ -18,5 +18,11 @@
         {
             public const int GRAPH_LIMIT = 16;
         }
+
+        public static class MatrixConstants
+        {
+            public const int MATRIX_GRID_WEIGHT = 30;
+            public const int MATRIX_GRID_HEIGHT = 30;
+        }
     }
 }
