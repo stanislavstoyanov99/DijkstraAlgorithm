@@ -1,14 +1,8 @@
-﻿
-namespace DijkstraAlgorithm.App.Visualization
+﻿namespace DijkstraAlgorithm.App.Visualization
 {
-    using System;
-    using System.Collections.Generic;
     using System.Drawing;
-    using System.Drawing.Drawing2D;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
+    using System.Drawing.Drawing2D;
     using Point = System.Drawing.Point;
 
     using DijkstraAlgorithm.Models;
@@ -31,12 +25,10 @@ namespace DijkstraAlgorithm.App.Visualization
 
         public CPictureBox PictureBoxGraph { get; private set; }
 
-        // TODO
         public PictureBox PictureBoxMatrix { get; private set; }
 
         public TabControl TabControl { get; set; }
 
-        // TODO
         public TabPage TabPageMatrix { get; private set; }
 
         public TabPage TapPageLogs { get; private set; }
@@ -121,7 +113,7 @@ namespace DijkstraAlgorithm.App.Visualization
                 {
                     if (vertex == null)
                     {
-                        bool result = Graph.Add(new Vertex(Graph.VertexCount)
+                        bool result = Graph.AddVertex(new Vertex(Graph.VertexCount)
                         {
                             X = x,
                             Y = y
@@ -141,7 +133,7 @@ namespace DijkstraAlgorithm.App.Visualization
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
-                    bool isRemoved = Graph.Remove(vertex);
+                    bool isRemoved = Graph.RemoveVertex(vertex);
 
                     if (!isRemoved)
                     {
@@ -172,17 +164,13 @@ namespace DijkstraAlgorithm.App.Visualization
                     {
                         IEdge edge = Graph.GetEdge(Graph[row], Graph[col]);
 
-                        if (edge != null && edge.Weight > 0)
+                        if (edge != null && edge.Weight - 1 == 0)
                         {
-                            if (edge.Weight - 1 == 0)
-                            {
-                                //break capsulation rule
-                                //Graph.Edges.Remove(edge);
-                            }
-                            else
-                            {
-                                edge.Weight--;
-                            }
+                            Graph.RemoveEdge(edge);
+                        }
+                        else
+                        {
+                            edge.Weight--;
                         }
 
                         PictureBoxMatrix.Invalidate();
@@ -202,6 +190,7 @@ namespace DijkstraAlgorithm.App.Visualization
                 this.matrixHoverPoint = new Point(x, y);
 
                 this.PictureBoxMatrix.Invalidate();
+                this.PictureBoxGraph.Invalidate();
             };
         }
 

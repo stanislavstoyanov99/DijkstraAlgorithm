@@ -12,9 +12,9 @@
 
     public class Graph : IEnumerable<IVertex>, IGraph
     {
-        public List<IVertex> vertices;
+        private readonly List<IVertex> vertices;
 
-        public List<IEdge> edges;
+        private readonly List<IEdge> edges;
 
         public Graph()
         {
@@ -40,7 +40,7 @@
 
         public int VertexCount => this.Vertices.Count;
 
-        public bool Add(IVertex vertex)
+        public bool AddVertex(IVertex vertex)
         {
             if (this.VertexCount < GraphConstants.VERTEX_LIMIT)
             {
@@ -57,7 +57,7 @@
         /// <summary>
         /// Removes vertex from graph, then sorts all vertices by ID and recalculates Ids
         /// </summary>
-        public bool Remove(IVertex vertex)
+        public bool RemoveVertex(IVertex vertex)
         {
             if (vertex == null)
             {
@@ -84,6 +84,32 @@
 
             // Removes the connections of the already deleted vertex
             this.Disconnect(vertexToDelete);
+
+            return isRemoved;
+        }
+
+        /// <summary>
+        /// Removes edge from graph
+        /// </summary>
+        public bool RemoveEdge(IEdge edge)
+        {
+            if (edge == null)
+            {
+                return false;
+            }
+
+            bool isRemoved = true;
+
+            var edgeToDelete = this.edges
+                .FirstOrDefault(e => e.FirstVertex.Id == edge.FirstVertex.Id &&
+                e.SecondVertex.Id == edge.SecondVertex.Id);
+
+            if (edgeToDelete == null)
+            {
+                isRemoved = false;
+            }
+
+            this.edges.Remove(edgeToDelete);
 
             return isRemoved;
         }

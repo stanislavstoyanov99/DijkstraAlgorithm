@@ -19,12 +19,14 @@
 
         IVertex GetVertex(int x, int y);
 
-        bool Add(IVertex vertex);
+        bool AddVertex(IVertex vertex);
 
-        bool Remove(IVertex vertex);
+        bool RemoveVertex(IVertex vertex);
 
         void Connect(IVertex firstVertex, IVertex secondVertex);
 
         int VertexCount { get; }
+
+        bool RemoveEdge(IEdge edge);
     }
 }
