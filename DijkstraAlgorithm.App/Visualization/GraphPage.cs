@@ -292,7 +292,7 @@
             }
 
             // Vertex Ellipse Reconstruction
-            foreach (IVertex vertex in Graph)
+            foreach (IVertex vertex in Graph.Vertices)
             {
                 var brushFill = new SolidBrush(Color.LightYellow);
                 var pen = new Pen(Color.Black);
@@ -320,7 +320,7 @@
                 (matrixHoverPoint.X / VertexConstants.CENTER_DIAMETER) <= Graph.VertexCount &&
                 matrixHoverPoint.Y / VertexConstants.CENTER_DIAMETER <= Graph.VertexCount)
             {
-                var brush = new SolidBrush(Color.WhiteSmoke);
+                var brush = new SolidBrush(Color.LightYellow);
 
                 e.Graphics.FillRectangle(brush,
                     matrixHoverPoint.X,

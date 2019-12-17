@@ -1,9 +1,8 @@
 ﻿namespace DijkstraAlgorithm.Models.Interfaces
 {
-    using System.Collections;
     using System.Collections.Generic;
 
-    public interface IGraph : IEnumerable
+    public interface IGraph
     {
         IEnumerable<IVertex> NonVisited();
 

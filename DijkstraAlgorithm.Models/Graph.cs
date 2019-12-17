@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using System.Collections;
     using System.Collections.Generic;
 
     using DijkstraAlgorithm.Models.Interfaces;
@@ -10,7 +9,7 @@
 
     using static Utilities.ConstantDelimeters;
 
-    public class Graph : IEnumerable<IVertex>, IGraph
+    public class Graph : IGraph
     {
         private readonly List<IVertex> vertices;
 
@@ -25,16 +24,6 @@
         public IReadOnlyCollection<IVertex> Vertices => this.vertices.AsReadOnly();
 
         public IReadOnlyCollection<IEdge> Edges => this.edges.AsReadOnly();
-
-        public IEnumerator<IVertex> GetEnumerator()
-        {
-            return this.Vertices.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
 
         public IVertex this[int index] => this.vertices[index];
 
