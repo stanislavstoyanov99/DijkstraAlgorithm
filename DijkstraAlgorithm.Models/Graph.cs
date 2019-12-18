@@ -25,7 +25,25 @@
 
         public IReadOnlyCollection<IEdge> Edges => this.edges.AsReadOnly();
 
-        public IVertex this[int index] => this.vertices[index];
+        public IVertex this[int index]
+        {
+            get
+            {
+                if (index >= 0 && this.vertices.Count != 0)
+                {
+                    return this.vertices[index];
+                }
+                else
+                {
+                    if (this.vertices.Count == 0)
+                    {
+                        throw new IndexOutOfRangeException(ExceptionMessages.MissingGraph);
+                    }
+
+                    throw new IndexOutOfRangeException(ExceptionMessages.InvalidStartVertexId);
+                }
+            }
+        }
 
         public int VertexCount => this.Vertices.Count;
 
@@ -134,12 +152,6 @@
                 e[0] == secondVertex && e[1] == firstVertex)
                 .FirstOrDefault();
 
-            if (edge == null)
-            {
-                throw new ArgumentNullException(nameof(edge),
-                    ExceptionMessages.EdgeCouldNotBeFound);
-            }
-
             return edge;
         }
 
@@ -156,35 +168,70 @@
         }
 
         /// <summary>
-        /// Streams all vertices whose 'permanent variable' is false
+        /// Returns all vertices whose 'permanent variable' is false
         /// </summary>
         public IEnumerable<IVertex> NonPermanent()
         {
             var nonPermanentVertices = this.vertices
                 .Where(v => v.Permanent == false)
-                .Select(v => v)
                 .ToList();
 
             return nonPermanentVertices;
         }
 
         /// <summary>
-        /// Streams all unvisited vertices in a graph
+        /// Returns all unvisited vertices in a graph
         /// </summary>
         public IEnumerable<IVertex> NonVisited()
         {
             var nonVisitedVertices = this.vertices
                 .Where(v => v.Visited == false)
-                .Select(v => v)
                 .ToList();
 
             return nonVisitedVertices;
         }
 
-        // TODO
-        public static void Dijkstra(IGraph Graph, int StartId)
+        /// <summary>
+        /// Calculates the shortest distance between vertices using Dijkstra's algorithm.
+        /// </summary>
+        public static void Dijkstra(IGraph Graph, int startId)
         {
+            IVertex initialVertex = Graph[startId];
 
+            initialVertex.MinCost = 0;
+            initialVertex.Permanent = true;
+            initialVertex.SourceId = initialVertex.Id;
+
+            for (int i = 0; i < Graph.VertexCount; i++)
+            {
+                int minCost = int.MaxValue;
+                int index = 0;
+
+                foreach (IVertex currVertex in Graph.NonPermanent())
+                {
+                    var edge = Graph.GetEdge(initialVertex, currVertex);
+
+                    if (edge != null)
+                    {
+                        int sum = initialVertex.MinCost + edge.Weight;
+
+                        if (sum < currVertex.MinCost)
+                        {
+                            currVertex.MinCost = initialVertex.MinCost + edge.Weight;
+                            currVertex.SourceId = initialVertex.Id;
+                        }
+                    }
+
+                    if (currVertex.MinCost < minCost)
+                    {
+                        minCost = currVertex.MinCost;
+                        index = currVertex.Id;
+                    }
+                }
+
+                Graph[index].Permanent = true;
+                initialVertex = Graph[index];
+            }
         }
 
         /// <summary>

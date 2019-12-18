@@ -9,13 +9,14 @@
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Forms;
+    using System.Text.RegularExpressions;
 
     using DijkstraAlgorithm.Models;
     using DijkstraAlgorithm.App.Visualization;
     using DijkstraAlgorithm.App.Utilities.Messages;
 
+    using DijkstraAlgorithm.Models.Interfaces;
     using static Models.Utilities.ConstantDelimeters;
-    using System.Text.RegularExpressions;
 
     public partial class MainForm : Form
     {
@@ -31,6 +32,7 @@
 
             string tabName = pageNameTextbox.Text;
 
+            // Validation of tab name - cannot consist only numbers
             if (Regex.IsMatch(tabName, "^[0-9]+$"))
             {
                 MessageBox.Show(OutputMessages.InvalidTabName, "Warning");
@@ -73,7 +75,74 @@
         // TODO
         private void buttonRun_Click(object sender, EventArgs e)
         {
+            int value;
 
+            if (!(this.TabControl.TabCount > 1))
+            {
+                MessageBox.Show(OutputMessages.TabPageNotFound, "Warning");
+                textBoxInitial.ResetText();
+                return;
+            }
+
+            IGraph invokeGraph = (this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage).InvokeGraph;
+            RichTextBox invokeRTB = (this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage).RichTextBoxLogs;
+
+            try
+            {
+                if (!rbDijkstra.Checked)
+                {
+                    MessageBox.Show(OutputMessages.AlgorithmDefinedMessage, "Warning");
+                    return;
+                }
+
+                if (int.TryParse(textBoxInitial.Text, out value))
+                {
+                    if (rbDijkstra.Checked)
+                    {
+                        invokeRTB.Text = string.Empty;
+                        Graph.Dijkstra(invokeGraph, value - 1);
+
+                        foreach (IVertex vertex in invokeGraph.Vertices)
+                        {
+                            if (vertex.Id != value - 1)
+                            {
+                                if (vertex.MinCost == int.MaxValue || vertex.MinCost == int.MaxValue * -1)
+                                {
+                                    invokeRTB.Text +=
+                                        String.Format(OutputMessages.InfinityMessage,
+                                        value,
+                                        vertex.Id + 1) +
+                                        Environment.NewLine;
+                                }
+                                else
+                                {
+                                    invokeRTB.Text +=
+                                        String.Format(OutputMessages.DistanceMessage,
+                                        value,
+                                        vertex.Id + 1,
+                                        vertex.MinCost) +
+                                        Environment.NewLine;
+                                }
+                            }
+
+                            vertex.MinCost = int.MaxValue;
+                            vertex.Permanent = false;
+                        }
+
+                        (this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage).TabControl.SelectedIndex = 1;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(OutputMessages.InvalidStartVertexId, "Warning");
+                    textBoxInitial.ResetText();
+                }
+            }
+            catch (IndexOutOfRangeException iore)
+            {
+                MessageBox.Show(iore.Message, "Warning");
+                textBoxInitial.ResetText();
+            }        
         }
 
         // TODO

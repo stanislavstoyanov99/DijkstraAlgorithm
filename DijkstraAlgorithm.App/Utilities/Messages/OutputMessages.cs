@@ -10,6 +10,18 @@
 
         public const string VertexCouldNotBeFound = "The requested vertex could not be found.";
 
+        public const string InvalidStartVertexId = "Initial Vertex Id textbox should not be empty or contain letters.";
+
+        public const string EdgeCouldNotBeFound = "Cannot lower value of missing edge.";
+
         public const string InvalidTabName = "Tab name should consist only lower or uppercase letters.";
+
+        public const string InfinityMessage = "Shortest distance between vertices {0} and {1} is INFINITY";
+
+        public const string DistanceMessage = "Shortest distance between vertices {0} and {1} is {2}";
+
+        public const string AlgorithmDefinedMessage = "Please choose algorithm to run.";
+
+        public const string TabPageNotFound = "Please add new work tab page.";
     }
 }

@@ -15,7 +15,6 @@
 
         public int Y { get; set; }
 
-        // Does not set in constructor - why?
         public int SourceId { get; set; }
 
         public int MinCost { get; set; }

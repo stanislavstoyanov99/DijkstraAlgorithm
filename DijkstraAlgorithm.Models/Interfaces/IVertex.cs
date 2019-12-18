@@ -1,8 +1,9 @@
 ﻿namespace DijkstraAlgorithm.Models.Interfaces
 {
+    using System;
     using System.Drawing;
 
-    public interface IVertex
+    public interface IVertex : IComparable
     {
         int Id { get; set; }
 
@@ -10,13 +11,13 @@
 
         int Y { get; }
 
-        int SourceId { get; }
+        int SourceId { get; set; }
 
-        int MinCost { get; }
+        int MinCost { get; set; }
 
-        bool Permanent { get; }
+        bool Permanent { get; set; }
 
-        bool Visited { get; }
+        bool Visited { get; set; }
 
         Point Center { get; }
 

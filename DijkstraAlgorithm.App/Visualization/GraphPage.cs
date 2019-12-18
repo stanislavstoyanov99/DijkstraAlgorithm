@@ -106,7 +106,7 @@
                 int x = e.X / VertexConstants.CENTER_DIAMETER;
                 int y = e.Y / VertexConstants.CENTER_DIAMETER;
 
-                var vertex = Graph.GetVertex(x, y);
+                IVertex vertex = Graph.GetVertex(x, y);
 
                 // With left button - adds vertex; with right button - removes it
                 if (e.Button == MouseButtons.Left)
@@ -167,6 +167,10 @@
                         if (edge != null && edge.Weight - 1 == 0)
                         {
                             Graph.RemoveEdge(edge);
+                        }
+                        else if (edge == null)
+                        {
+                            MessageBox.Show(OutputMessages.EdgeCouldNotBeFound, "Warning");
                         }
                         else
                         {
@@ -268,6 +272,8 @@
 
                 e.Graphics.DrawLine(pen, source, destination);
                 e.Graphics.DrawString(EdgeConstants.INITIAL_WEIGHT.ToString(), this.Font, brush, x, y);
+
+                pen.Dispose();
             }
 
             // Connection Line Reconstruction
@@ -303,11 +309,16 @@
                 e.Graphics.FillEllipse(brushFill, fillRectangle);
                 e.Graphics.DrawEllipse(pen, drawRectangle);
 
+                brushFill.Dispose();
+                pen.Dispose();
+
                 var brushDraw = new SolidBrush(Color.Black);
-                float x = vertex.Location.X + 7;
+                float x = vertex.Location.X + 7; // set value so that number is in the center of ellipse
                 float y = vertex.Location.Y + 9;
 
                 e.Graphics.DrawString(string.Format("{0,2}", vertex.Id + 1), this.Font, brushDraw, x, y);
+
+                brushDraw.Dispose();
             }
         }
 
@@ -327,10 +338,12 @@
                     matrixHoverPoint.Y,
                     MatrixConstants.MATRIX_GRID_WEIGHT,
                     MatrixConstants.MATRIX_GRID_HEIGHT);
+
+                brush.Dispose();
             }
 
             // Horizonal Label Reconstruction
-            var font = new Font("Roboto Condensed", 9, FontStyle.Italic);
+            var font = new Font("Consolas", 10, FontStyle.Italic);
             var solidBrush = new SolidBrush(Color.Black);
 
             int x = MatrixConstants.MATRIX_GRID_WEIGHT, y = 0;
@@ -367,12 +380,12 @@
                         MatrixConstants.MATRIX_GRID_WEIGHT,
                         MatrixConstants.MATRIX_GRID_HEIGHT);
 
+                    pen.Dispose();
+
                     // Ensure there isn't any loop on matrix diagonal
                     if (row == col)
                     {
-                        var fontConsolas = new Font("Consolas", 10, FontStyle.Regular);
-
-                        e.Graphics.DrawString(string.Format("{0,2}", "-"), fontConsolas, solidBrush, x + 2, y + 7);
+                        e.Graphics.DrawString(string.Format("{0,2}", "-"), font, solidBrush, x + 2, y + 7);
                     }
 
                     foreach (IEdge edge in Graph.Edges)
@@ -389,6 +402,9 @@
                 x = MatrixConstants.MATRIX_GRID_WEIGHT;
                 y += MatrixConstants.MATRIX_GRID_HEIGHT;
             }
+
+            font.Dispose();
+            solidBrush.Dispose();
         }
     }
 }
