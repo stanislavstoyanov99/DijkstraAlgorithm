@@ -1,13 +1,12 @@
 ﻿namespace DijkstraAlgorithm.Models
 {
-    using System;
     using System.Drawing;
 
     using DijkstraAlgorithm.Models.Interfaces;
 
     using static Utilities.ConstantDelimeters;
 
-    public class Vertex : IComparable, IVertex
+    public class Vertex : IVertex
     {
         public int Id { get; set; }
 
@@ -49,15 +48,5 @@
         /// </summary>
         public Size Size =>
             new Size(VertexConstants.CENTER_DIAMETER, VertexConstants.CENTER_DIAMETER);
-
-        public int CompareTo(object obj)
-        {
-            return this.Id.CompareTo((obj as Vertex).Id);
-        }
-
-        public static int operator +(Vertex x, Edge y)
-        {
-            return x.MinCost + y.Weight;
-        }
     }
 }

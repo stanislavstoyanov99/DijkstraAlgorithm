@@ -1,9 +1,8 @@
 ﻿namespace DijkstraAlgorithm.Models.Interfaces
 {
-    using System;
     using System.Drawing;
 
-    public interface IVertex : IComparable
+    public interface IVertex
     {
         int Id { get; set; }
 

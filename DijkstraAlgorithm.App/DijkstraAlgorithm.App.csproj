@@ -90,13 +90,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Visualization\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\DijkstraAlgorithm.Models\DijkstraAlgorithm.Models.csproj">
       <Project>{feb0ceca-4f13-4de4-93d9-35aa3ff91159}</Project>
       <Name>DijkstraAlgorithm.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Visualization\favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

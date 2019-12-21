@@ -23,6 +23,8 @@
 
         private Point matrixHoverPoint = new Point(0, 0);
 
+        private Point graphHoverPoint = new Point(0, 0);
+
         public CPictureBox PictureBoxGraph { get; private set; }
 
         public PictureBox PictureBoxMatrix { get; private set; }
@@ -35,7 +37,7 @@
 
         public RichTextBox RichTextBoxLogs { get; set; }
 
-        public IGraph InvokeGraph { get; set; }
+        public IGraph InvokeGraph { get; private set; }
 
         public GraphPage(IGraph Graph, string tabName = "New tab")
         {
@@ -229,7 +231,7 @@
                 Size = new Size(480, 480)
             };
 
-            this.TapPageLogs = new TabPage("Логове")
+            this.TapPageLogs = new TabPage("Резултат от изпълнението")
             {
                 BackColor = Color.White
             };
@@ -332,6 +334,7 @@
                 matrixHoverPoint.Y / VertexConstants.CENTER_DIAMETER <= Graph.VertexCount)
             {
                 var brush = new SolidBrush(Color.LightYellow);
+                var pen = new Pen(Color.Black);
 
                 e.Graphics.FillRectangle(brush,
                     matrixHoverPoint.X,
@@ -340,6 +343,7 @@
                     MatrixConstants.MATRIX_GRID_HEIGHT);
 
                 brush.Dispose();
+                pen.Dispose();
             }
 
             // Horizonal Label Reconstruction

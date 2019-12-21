@@ -19,6 +19,6 @@
 
         RichTextBox RichTextBoxLogs { get; set; }
 
-        IGraph InvokeGraph { get; set; }
+        IGraph InvokeGraph { get; }
     }
 }

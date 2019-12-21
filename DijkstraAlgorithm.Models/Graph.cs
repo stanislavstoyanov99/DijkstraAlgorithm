@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Windows.Forms;
     using System.Collections.Generic;
 
     using DijkstraAlgorithm.Models.Interfaces;
@@ -62,7 +63,7 @@
         }
 
         /// <summary>
-        /// Removes vertex from graph, then sorts all vertices by ID and recalculates Ids
+        /// Removes vertex from graph, then recalculates Ids
         /// </summary>
         public bool RemoveVertex(IVertex vertex)
         {
@@ -82,7 +83,6 @@
             }
 
             this.vertices.Remove(vertexToDelete);
-            this.vertices.Sort();
 
             for (int i = 0; i < this.VertexCount; i++)
             {
@@ -194,7 +194,7 @@
         /// <summary>
         /// Calculates the shortest distance between vertices using Dijkstra's algorithm.
         /// </summary>
-        public static void Dijkstra(IGraph Graph, int startId)
+        public static void Dijkstra(IGraph Graph, int startId, PictureBox pictureBox)
         {
             IVertex initialVertex = Graph[startId];
 
@@ -209,7 +209,7 @@
 
                 foreach (IVertex currVertex in Graph.NonPermanent())
                 {
-                    var edge = Graph.GetEdge(initialVertex, currVertex);
+                    IEdge edge = Graph.GetEdge(initialVertex, currVertex);
 
                     if (edge != null)
                     {
@@ -227,6 +227,30 @@
                         minCost = currVertex.MinCost;
                         index = currVertex.Id;
                     }
+
+                    if (currVertex.Id != startId - 1)
+                    {
+                        if (currVertex.MinCost == int.MaxValue || currVertex.MinCost == int.MaxValue * -1)
+                        {
+                            invokeRTB.Text +=
+                                String.Format(OutputMessages.InfinityMessage,
+                                startId,
+                                currVertex.Id + 1) +
+                                Environment.NewLine;
+                        }
+                        else
+                        {
+                            invokeRTB.Text +=
+                                String.Format(OutputMessages.DistanceMessage,
+                                startId,
+                                currVertex.Id + 1,
+                                currVertex.MinCost) +
+                                Environment.NewLine;
+                        }
+                    }
+
+                    currVertex.MinCost = int.MaxValue;
+                    currVertex.Permanent = false;
                 }
 
                 Graph[index].Permanent = true;

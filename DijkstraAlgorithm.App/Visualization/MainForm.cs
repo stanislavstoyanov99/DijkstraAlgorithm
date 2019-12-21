@@ -17,6 +17,7 @@
 
     using DijkstraAlgorithm.Models.Interfaces;
     using static Models.Utilities.ConstantDelimeters;
+    using System.Threading;
 
     public partial class MainForm : Form
     {
@@ -32,7 +33,7 @@
 
             string tabName = pageNameTextbox.Text;
 
-            // Validation of tab name - cannot consist only numbers
+            // Validation of tab name - cannot consist only numbers, letters and special symbols are allowed
             if (Regex.IsMatch(tabName, "^[0-9]+$"))
             {
                 MessageBox.Show(OutputMessages.InvalidTabName, "Warning");
@@ -72,7 +73,6 @@
             }
         }
 
-        // TODO
         private void buttonRun_Click(object sender, EventArgs e)
         {
             int value;
@@ -100,7 +100,9 @@
                     if (rbDijkstra.Checked)
                     {
                         invokeRTB.Text = string.Empty;
-                        Graph.Dijkstra(invokeGraph, value - 1);
+
+                        // TODO - should be made step by step
+                        Graph.Dijkstra(invokeGraph, value - 1, this.PictureBoxGraph);
 
                         foreach (IVertex vertex in invokeGraph.Vertices)
                         {
