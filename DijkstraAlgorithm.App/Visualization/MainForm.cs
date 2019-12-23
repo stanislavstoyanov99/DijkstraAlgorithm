@@ -11,6 +11,7 @@
     using System.Windows.Forms;
     using System.Text.RegularExpressions;
 
+    using Dijkstra;
     using DijkstraAlgorithm.Models;
     using DijkstraAlgorithm.App.Visualization;
     using DijkstraAlgorithm.App.Utilities.Messages;
@@ -25,6 +26,14 @@
         {
             InitializeComponent();
         }
+
+        struct DataParameter
+        {
+            public int Process;
+            public int Delay;
+        }
+
+        private DataParameter inputParameter;
 
         private void buttonAddTab_Click(object sender, EventArgs e)
         {
@@ -77,8 +86,6 @@
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
-            int startId;
-
             if (!(this.TabControl.TabCount > 1))
             {
                 MessageBox.Show(OutputMessages.TabPageNotFound, "Warning");
@@ -88,6 +95,8 @@
 
             IGraph invokeGraph = (this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage).InvokeGraph;
             RichTextBox invokeRTB = (this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage).RichTextBoxLogs;
+
+            int startId;
 
             try
             {
@@ -102,12 +111,20 @@
                     if (rbDijkstra.Checked)
                     {
                         invokeRTB.Text = string.Empty;
+                        var currentGraphPage = this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage;
 
-                        // TODO - should be made step by step
-                        Graph.Dijkstra(invokeGraph, startId - 1, this.PictureBoxGraph);
+                        if (!backgroundWorker1.IsBusy)
+                        {
+                            inputParameter.Delay = 100;
+                            inputParameter.Process = 1200;
+                            backgroundWorker1.RunWorkerAsync(inputParameter);
+                        }
+
+                        Dijkstra.GetShortestPath(invokeGraph, startId - 1, currentGraphPage.PictureBoxGraph);
+
                         WriteMessages(startId, invokeGraph, invokeRTB);
 
-                        (this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage).TabControl.SelectedIndex = 1;
+                        currentGraphPage.TabControl.SelectedIndex = 1;
                     }
                 }
                 else
@@ -120,7 +137,7 @@
             {
                 MessageBox.Show(iore.Message, "Warning");
                 textBoxInitial.ResetText();
-            }        
+            }
         }
 
         private static void WriteMessages(int startId, IGraph invokeGraph, RichTextBox invokeRTB)
@@ -163,6 +180,37 @@
         private void saveButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int process = ((DataParameter)e.Argument).Process;
+            int delay = ((DataParameter)e.Argument).Delay;
+            //int index = 1;
+
+            try
+            {
+                for (int i = 0; i < process; i++)
+                {
+                    if (!backgroundWorker1.CancellationPending)
+                    {
+                        //backgroundWorker1.ReportProgress(index++ * 100 / process, string.Format("Process data {0}", i));
+                        Thread.Sleep(delay);
+
+                        // TODO                   
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                backgroundWorker1.CancelAsync();
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show("Algorithm has finished execution.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

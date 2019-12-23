@@ -42,10 +42,10 @@
             pen.Dispose();
         }
 
-        public void Draw(PaintEventArgs e)
+        public void Draw(PaintEventArgs e, Color color)
         {
             // Connection Line Reconstruction
-            using (var pen = new Pen(Color.IndianRed, 2))
+            using (var pen = new Pen(color, 2))
             {
                 e.Graphics.DrawLine(pen, this.Edge[0].Center, this.Edge[1].Center);
             }

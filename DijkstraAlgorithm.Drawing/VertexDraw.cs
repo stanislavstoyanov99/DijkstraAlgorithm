@@ -15,9 +15,9 @@
 
         public IVertex Vertex { get; private set; }
 
-        public void Draw(PaintEventArgs e)
+        public void Draw(PaintEventArgs e, Color color)
         {
-            var brushFill = new SolidBrush(Color.LightYellow);
+            var brushFill = new SolidBrush(color);
             var pen = new Pen(Color.Black);
 
             var fillRectangle = new Rectangle(Vertex.Location, Vertex.Size);

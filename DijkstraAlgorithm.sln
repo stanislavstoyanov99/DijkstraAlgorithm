@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DijkstraAlgorithm.Drawing",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DijkstraAlgorithm.InputOutput", "DijkstraAlgorithm.InputOutput\DijkstraAlgorithm.InputOutput.csproj", "{B6B161E8-D5C7-4CE8-92C9-35F216B4D30A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dijkstra", "Dijkstra\Dijkstra.csproj", "{C4F10CD9-A5B0-4275-875B-EA060F216E3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B6B161E8-D5C7-4CE8-92C9-35F216B4D30A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6B161E8-D5C7-4CE8-92C9-35F216B4D30A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6B161E8-D5C7-4CE8-92C9-35F216B4D30A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F10CD9-A5B0-4275-875B-EA060F216E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F10CD9-A5B0-4275-875B-EA060F216E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F10CD9-A5B0-4275-875B-EA060F216E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F10CD9-A5B0-4275-875B-EA060F216E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

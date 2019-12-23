@@ -24,8 +24,6 @@
 
         private Point matrixHoverPoint = new Point(0, 0);
 
-        private Point graphHoverPoint = new Point(0, 0);
-
         public CPictureBox PictureBoxGraph { get; private set; }
 
         public PictureBox PictureBoxMatrix { get; private set; }
@@ -266,14 +264,15 @@
             {
                 var lineDraw = new LineDraw(edge);
 
-                lineDraw.Draw(e);
+                lineDraw.Draw(e, Color.IndianRed);
             }
 
             // Vertex Ellipse Reconstruction
             foreach (IVertex vertex in Graph.Vertices)
             {
                 VertexDraw vertexDraw = new VertexDraw(vertex);
-                vertexDraw.Draw(e);
+
+                vertexDraw.Draw(e, Color.LightYellow);
             }
         }
 

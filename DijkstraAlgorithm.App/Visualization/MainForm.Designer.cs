@@ -40,17 +40,18 @@ namespace DijkstraAlgorithm.App
             this.rbDijkstra = new System.Windows.Forms.RadioButton();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.gPage = new System.Windows.Forms.TabPage();
+            this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TapPageMatrix = new System.Windows.Forms.TabPage();
             this.pageNameTextbox = new System.Windows.Forms.TextBox();
             this.pageNamelabel = new System.Windows.Forms.Label();
             this.loadButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.PictureBoxGraph = new DijkstraAlgorithm.App.Visualization.CPictureBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.TabControl.SuspendLayout();
             this.gPage.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // initialVertexId
@@ -146,6 +147,17 @@ namespace DijkstraAlgorithm.App
             this.gPage.Text = "Примерен граф";
             this.gPage.UseVisualStyleBackColor = true;
             // 
+            // PictureBoxGraph
+            // 
+            this.PictureBoxGraph.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBoxGraph.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxGraph.BackgroundImage")));
+            this.PictureBoxGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PictureBoxGraph.Location = new System.Drawing.Point(16, 24);
+            this.PictureBoxGraph.Name = "PictureBoxGraph";
+            this.PictureBoxGraph.Size = new System.Drawing.Size(685, 584);
+            this.PictureBoxGraph.TabIndex = 1;
+            this.PictureBoxGraph.TabStop = false;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.TapPageMatrix);
@@ -207,16 +219,10 @@ namespace DijkstraAlgorithm.App
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // PictureBoxGraph
+            // backgroundWorker1
             // 
-            this.PictureBoxGraph.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBoxGraph.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxGraph.BackgroundImage")));
-            this.PictureBoxGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PictureBoxGraph.Location = new System.Drawing.Point(16, 24);
-            this.PictureBoxGraph.Name = "PictureBoxGraph";
-            this.PictureBoxGraph.Size = new System.Drawing.Size(685, 584);
-            this.PictureBoxGraph.TabIndex = 1;
-            this.PictureBoxGraph.TabStop = false;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -243,8 +249,8 @@ namespace DijkstraAlgorithm.App
             this.Text = "Dijkstra Algorithm App";
             this.TabControl.ResumeLayout(false);
             this.gPage.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,6 +274,7 @@ namespace DijkstraAlgorithm.App
         private Label pageNamelabel;
         private Button loadButton;
         private Button saveButton;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

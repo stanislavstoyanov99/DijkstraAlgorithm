@@ -9,6 +9,6 @@
     {
         IVertex Vertex { get; }
 
-        void Draw(PaintEventArgs e);
+        void Draw(PaintEventArgs e, Color color);
     }
 }
