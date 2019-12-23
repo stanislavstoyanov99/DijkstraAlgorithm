@@ -202,7 +202,7 @@
             initialVertex.Permanent = true;
             initialVertex.SourceId = initialVertex.Id;
 
-            for (int i = 0; i < Graph.VertexCount; i++)
+            foreach (var vertex in Graph.Vertices)
             {
                 int minCost = int.MaxValue;
                 int index = 0;
@@ -217,7 +217,7 @@
 
                         if (sum < currVertex.MinCost)
                         {
-                            currVertex.MinCost = initialVertex.MinCost + edge.Weight;
+                            currVertex.MinCost = sum;
                             currVertex.SourceId = initialVertex.Id;
                         }
                     }
@@ -226,36 +226,19 @@
                     {
                         minCost = currVertex.MinCost;
                         index = currVertex.Id;
-                    }
 
-                    if (currVertex.Id != startId - 1)
-                    {
-                        if (currVertex.MinCost == int.MaxValue || currVertex.MinCost == int.MaxValue * -1)
-                        {
-                            invokeRTB.Text +=
-                                String.Format(OutputMessages.InfinityMessage,
-                                startId,
-                                currVertex.Id + 1) +
-                                Environment.NewLine;
-                        }
-                        else
-                        {
-                            invokeRTB.Text +=
-                                String.Format(OutputMessages.DistanceMessage,
-                                startId,
-                                currVertex.Id + 1,
-                                currVertex.MinCost) +
-                                Environment.NewLine;
-                        }
+                        pictureBox.Paint += (sender, e) => Graph_Paint(sender, e, Graph);
                     }
-
-                    currVertex.MinCost = int.MaxValue;
-                    currVertex.Permanent = false;
                 }
 
                 Graph[index].Permanent = true;
                 initialVertex = Graph[index];
             }
+        }
+
+        private static void Graph_Paint(object sender, PaintEventArgs e, IGraph Graph)
+        {
+            
         }
 
         /// <summary>

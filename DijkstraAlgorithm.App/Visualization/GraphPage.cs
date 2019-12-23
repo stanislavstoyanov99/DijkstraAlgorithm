@@ -12,6 +12,7 @@
     using DijkstraAlgorithm.App.Utilities.Messages;
 
     using static Models.Utilities.ConstantDelimeters;
+    using DijkstraAlgorithm.Drawing;
 
     public class GraphPage : TabPage, IGraphPage
     {
@@ -257,70 +258,22 @@
             // Drag & Drop Connection Line Reconstruction
             if (this.onHold)
             {
-                var pen = new Pen(Color.DarkBlue, 2)
-                {
-                    DashPattern = new[]
-                    {
-                        4f,
-                        4f,
-                        4f,
-                        4f
-                    },
-                };
-
-                var brush = new SolidBrush(Color.Black);
-                float x = 0.5f * (source.X + destination.X);
-                float y = 0.5f * (source.Y + destination.Y);
-
-                e.Graphics.DrawLine(pen, source, destination);
-                e.Graphics.DrawString(EdgeConstants.INITIAL_WEIGHT.ToString(), this.Font, brush, x, y);
-
-                pen.Dispose();
+                var lineDraw = new LineDraw();
+                lineDraw.DrawDragDropLine(e, source, destination);
             }
 
-            // Connection Line Reconstruction
             foreach (IEdge edge in Graph.Edges)
             {
-                using (var pen = new Pen(Color.IndianRed, 2))
-                {
-                    e.Graphics.DrawLine(pen, edge[0].Center, edge[1].Center);
-                }
-            }
+                var lineDraw = new LineDraw(edge);
 
-            // Connection Weigh-Label Reconstruction
-            foreach (IEdge edge in Graph.Edges)
-            {
-                using (var brush = new SolidBrush(Color.Black))
-                {
-                    float x = 0.5f * (edge[0].Center.X + edge[1].Center.X);
-                    float y = 0.5f * (edge[0].Center.Y + edge[1].Center.Y);
-
-                    e.Graphics.DrawString(edge.Weight.ToString(), this.Font, brush, x, y);
-                };
+                lineDraw.Draw(e);
             }
 
             // Vertex Ellipse Reconstruction
             foreach (IVertex vertex in Graph.Vertices)
             {
-                var brushFill = new SolidBrush(Color.LightYellow);
-                var pen = new Pen(Color.Black);
-
-                var fillRectangle = new Rectangle(vertex.Location, vertex.Size);
-                var drawRectangle = new Rectangle(vertex.Location, vertex.Size);
-
-                e.Graphics.FillEllipse(brushFill, fillRectangle);
-                e.Graphics.DrawEllipse(pen, drawRectangle);
-
-                brushFill.Dispose();
-                pen.Dispose();
-
-                var brushDraw = new SolidBrush(Color.Black);
-                float x = vertex.Location.X + 7; // set value so that number is in the center of ellipse
-                float y = vertex.Location.Y + 9;
-
-                e.Graphics.DrawString(string.Format("{0,2}", vertex.Id + 1), this.Font, brushDraw, x, y);
-
-                brushDraw.Dispose();
+                VertexDraw vertexDraw = new VertexDraw(vertex);
+                vertexDraw.Draw(e);
             }
         }
 

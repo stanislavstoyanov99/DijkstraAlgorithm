@@ -10,5 +10,11 @@
 
         public const string MissingGraph 
             = "Please firstly construct your graph.";
+
+        public const string DistanceMessage
+            = "Shortest distance between vertices {0} and {1} is {2}";
+
+        public const string InfinityMessage
+            = "Shortest distance between vertices {0} and {1} is INFINITY";
     }
 }

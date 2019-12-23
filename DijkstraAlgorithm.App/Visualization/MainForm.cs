@@ -58,6 +58,8 @@
             }
 
             pageNameTextbox.ResetText();
+            textBoxInitial.ResetText();
+            rbDijkstra.Checked = false;
         }
 
         private void buttonCloseTab_Click(object sender, EventArgs e)
@@ -75,7 +77,7 @@
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
-            int value;
+            int startId;
 
             if (!(this.TabControl.TabCount > 1))
             {
@@ -95,41 +97,15 @@
                     return;
                 }
 
-                if (int.TryParse(textBoxInitial.Text, out value))
+                if (int.TryParse(textBoxInitial.Text, out startId))
                 {
                     if (rbDijkstra.Checked)
                     {
                         invokeRTB.Text = string.Empty;
 
                         // TODO - should be made step by step
-                        Graph.Dijkstra(invokeGraph, value - 1, this.PictureBoxGraph);
-
-                        foreach (IVertex vertex in invokeGraph.Vertices)
-                        {
-                            if (vertex.Id != value - 1)
-                            {
-                                if (vertex.MinCost == int.MaxValue || vertex.MinCost == int.MaxValue * -1)
-                                {
-                                    invokeRTB.Text +=
-                                        String.Format(OutputMessages.InfinityMessage,
-                                        value,
-                                        vertex.Id + 1) +
-                                        Environment.NewLine;
-                                }
-                                else
-                                {
-                                    invokeRTB.Text +=
-                                        String.Format(OutputMessages.DistanceMessage,
-                                        value,
-                                        vertex.Id + 1,
-                                        vertex.MinCost) +
-                                        Environment.NewLine;
-                                }
-                            }
-
-                            vertex.MinCost = int.MaxValue;
-                            vertex.Permanent = false;
-                        }
+                        Graph.Dijkstra(invokeGraph, startId - 1, this.PictureBoxGraph);
+                        WriteMessages(startId, invokeGraph, invokeRTB);
 
                         (this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage).TabControl.SelectedIndex = 1;
                     }
@@ -145,6 +121,36 @@
                 MessageBox.Show(iore.Message, "Warning");
                 textBoxInitial.ResetText();
             }        
+        }
+
+        private static void WriteMessages(int startId, IGraph invokeGraph, RichTextBox invokeRTB)
+        {
+            foreach (IVertex vertex in invokeGraph.Vertices)
+            {
+                if (vertex.Id != startId - 1)
+                {
+                    if (vertex.MinCost == int.MaxValue || vertex.MinCost == int.MaxValue * -1)
+                    {
+                        invokeRTB.Text +=
+                            String.Format(OutputMessages.InfinityMessage,
+                            startId,
+                            vertex.Id + 1) +
+                            Environment.NewLine;
+                    }
+                    else
+                    {
+                        invokeRTB.Text +=
+                            String.Format(OutputMessages.DistanceMessage,
+                            startId,
+                            vertex.Id + 1,
+                            vertex.MinCost) +
+                            Environment.NewLine;
+                    }
+                }
+
+                vertex.MinCost = int.MaxValue;
+                vertex.Permanent = false;
+            }
         }
 
         // TODO

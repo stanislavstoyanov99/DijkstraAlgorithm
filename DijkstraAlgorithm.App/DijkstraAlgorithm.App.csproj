@@ -93,6 +93,10 @@
     <Content Include="Visualization\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DijkstraAlgorithm.Drawing\DijkstraAlgorithm.Drawing.csproj">
+      <Project>{FF606AA9-2A1B-4172-A314-607821CA8895}</Project>
+      <Name>DijkstraAlgorithm.Drawing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DijkstraAlgorithm.Models\DijkstraAlgorithm.Models.csproj">
       <Project>{feb0ceca-4f13-4de4-93d9-35aa3ff91159}</Project>
       <Name>DijkstraAlgorithm.Models</Name>
