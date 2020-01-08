@@ -44,10 +44,10 @@
                     {
                         minCost = currVertex.MinCost;
                         index = currVertex.Id;
-
-                        pictureBoxGraph.Invalidate();
-                        pictureBoxGraph.Paint += (sender, e) => Graph_Paint(sender, e, currVertex, Color.Red);
                     }
+
+                    pictureBoxGraph.Invalidate();
+                    pictureBoxGraph.Paint += (sender, e) => Graph_Paint(sender, e, currVertex);
                 }
 
                 Graph[index].Permanent = true;
@@ -55,13 +55,13 @@
             }
         }
 
-        private static void Graph_Paint(object sender, PaintEventArgs e, IVertex vertex, Color vertexColor)
+        private static void Graph_Paint(object sender, PaintEventArgs e, IVertex vertex)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Vertex Ellipse Reconstruction
             VertexDraw vertexDraw = new VertexDraw(vertex);
-            vertexDraw.Draw(e, vertexColor);
+            vertexDraw.Draw(e, Color.Red);
         }
     }
 }

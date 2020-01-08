@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
     using System.ComponentModel;
     using System.Data;
     using System.Drawing;
@@ -18,7 +19,6 @@
 
     using DijkstraAlgorithm.Models.Interfaces;
     using static Models.Utilities.ConstantDelimeters;
-    using System.Threading;
 
     public partial class MainForm : Form
     {
@@ -90,6 +90,7 @@
             {
                 MessageBox.Show(OutputMessages.TabPageNotFound, "Warning");
                 textBoxInitial.ResetText();
+                rbDijkstra.Checked = false;
                 return;
             }
 
