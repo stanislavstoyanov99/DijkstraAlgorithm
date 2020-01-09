@@ -23,5 +23,7 @@
         Point Location { get; }
 
         Size Size { get; }
+
+        Color Color { get; set; }
     }
 }

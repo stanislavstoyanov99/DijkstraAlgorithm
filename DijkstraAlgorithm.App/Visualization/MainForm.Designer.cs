@@ -47,7 +47,6 @@ namespace DijkstraAlgorithm.App
             this.pageNamelabel = new System.Windows.Forms.Label();
             this.loadButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.TabControl.SuspendLayout();
             this.gPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxGraph)).BeginInit();
@@ -219,11 +218,6 @@ namespace DijkstraAlgorithm.App
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -274,7 +268,6 @@ namespace DijkstraAlgorithm.App
         private Label pageNamelabel;
         private Button loadButton;
         private Button saveButton;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

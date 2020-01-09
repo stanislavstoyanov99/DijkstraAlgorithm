@@ -6,13 +6,14 @@
     using Point = System.Drawing.Point;
 
     using DijkstraAlgorithm.Models;
-    using DijkstraAlgorithm.App.Interfaces;
     using DijkstraAlgorithm.Models.Interfaces;
 
+    using DijkstraAlgorithm.App.Interfaces;
     using DijkstraAlgorithm.App.Utilities.Messages;
 
-    using static Models.Utilities.ConstantDelimeters;
     using DijkstraAlgorithm.Drawing;
+
+    using static Models.Utilities.ConstantDelimeters;
 
     public class GraphPage : TabPage, IGraphPage
     {
@@ -46,8 +47,8 @@
 
             this.AddControls();
 
-            this.PictureBoxGraph.Paint += (sender, e) => Graph_OnPaint(sender, e, Graph);
-            this.PictureBoxMatrix.Paint += (sender, e) => Matrix_OnPaint(sender, e, Graph);
+            this.PictureBoxGraph.Paint += (sender, e) => Graph_OnPaint(e, Graph);
+            this.PictureBoxMatrix.Paint += (sender, e) => Matrix_OnPaint(e, Graph);
 
             Mouse_Down(Graph);
             Mouse_Up(Graph);
@@ -249,7 +250,7 @@
             this.TabControl.TabPages[1].Controls.Add(RichTextBoxLogs);
         }
 
-        private void Graph_OnPaint(object sender, PaintEventArgs e, IGraph Graph)
+        private void Graph_OnPaint(PaintEventArgs e, IGraph Graph)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -272,11 +273,11 @@
             {
                 VertexDraw vertexDraw = new VertexDraw(vertex);
 
-                vertexDraw.Draw(e, Color.LightYellow);
+                vertexDraw.Draw(e.Graphics);
             }
         }
 
-        private void Matrix_OnPaint(object sender, PaintEventArgs e, IGraph Graph)
+        private void Matrix_OnPaint(PaintEventArgs e, IGraph Graph)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 

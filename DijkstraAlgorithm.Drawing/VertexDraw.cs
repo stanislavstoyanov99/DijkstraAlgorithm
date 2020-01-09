@@ -15,16 +15,16 @@
 
         public IVertex Vertex { get; private set; }
 
-        public void Draw(PaintEventArgs e, Color color)
+        public void Draw(Graphics g)
         {
-            var brushFill = new SolidBrush(color);
+            var brushFill = new SolidBrush(Vertex.Color);
             var pen = new Pen(Color.Black);
 
             var fillRectangle = new Rectangle(Vertex.Location, Vertex.Size);
             var drawRectangle = new Rectangle(Vertex.Location, Vertex.Size);
 
-            e.Graphics.FillEllipse(brushFill, fillRectangle);
-            e.Graphics.DrawEllipse(pen, drawRectangle);
+            g.FillEllipse(brushFill, fillRectangle);
+            g.DrawEllipse(pen, drawRectangle);
 
             brushFill.Dispose();
             pen.Dispose();
@@ -33,7 +33,7 @@
             float x = Vertex.Location.X + 7; 
             float y = Vertex.Location.Y + 9;
 
-            e.Graphics.DrawString(string.Format("{0,2}", Vertex.Id + 1), Control.DefaultFont, brushDraw, x, y);
+            g.DrawString(string.Format("{0,2}", Vertex.Id + 1), Control.DefaultFont, brushDraw, x, y);
 
             brushDraw.Dispose();
         }

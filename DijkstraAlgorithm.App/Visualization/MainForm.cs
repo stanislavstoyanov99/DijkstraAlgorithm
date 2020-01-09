@@ -27,14 +27,6 @@
             InitializeComponent();
         }
 
-        struct DataParameter
-        {
-            public int Process;
-            public int Delay;
-        }
-
-        private DataParameter inputParameter;
-
         private void buttonAddTab_Click(object sender, EventArgs e)
         {
             var graph = new Graph();
@@ -114,13 +106,6 @@
                         invokeRTB.Text = string.Empty;
                         var currentGraphPage = this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage;
 
-                        if (!backgroundWorker1.IsBusy)
-                        {
-                            inputParameter.Delay = 100;
-                            inputParameter.Process = 1200;
-                            backgroundWorker1.RunWorkerAsync(inputParameter);
-                        }
-
                         Dijkstra.GetShortestPath(invokeGraph, startId - 1, currentGraphPage.PictureBoxGraph);
 
                         WriteMessages(startId, invokeGraph, invokeRTB);
@@ -181,37 +166,6 @@
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int process = ((DataParameter)e.Argument).Process;
-            int delay = ((DataParameter)e.Argument).Delay;
-            //int index = 1;
-
-            try
-            {
-                for (int i = 0; i < process; i++)
-                {
-                    if (!backgroundWorker1.CancellationPending)
-                    {
-                        //backgroundWorker1.ReportProgress(index++ * 100 / process, string.Format("Process data {0}", i));
-                        Thread.Sleep(delay);
-
-                        // TODO                   
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                backgroundWorker1.CancelAsync();
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            MessageBox.Show("Algorithm has finished execution.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

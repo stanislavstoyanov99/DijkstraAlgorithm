@@ -22,6 +22,8 @@
 
         public bool Visited { get; set; }
 
+        public Color Color { get; set; } = Color.LightYellow;
+
         public Vertex(int id)
         {
             this.Id = id;

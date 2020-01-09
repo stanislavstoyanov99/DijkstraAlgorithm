@@ -2,9 +2,7 @@
 {
     using System.Drawing;
     using System.Windows.Forms;
-    using System.Drawing.Drawing2D;
 
-    using DijkstraAlgorithm.Drawing;
     using DijkstraAlgorithm.Models.Interfaces;
 
     public static class Dijkstra
@@ -47,21 +45,12 @@
                     }
 
                     pictureBoxGraph.Invalidate();
-                    pictureBoxGraph.Paint += (sender, e) => Graph_Paint(sender, e, currVertex);
+                    currVertex.Color = Color.Red;
                 }
 
                 Graph[index].Permanent = true;
                 initialVertex = Graph[index];
             }
-        }
-
-        private static void Graph_Paint(object sender, PaintEventArgs e, IVertex vertex)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Vertex Ellipse Reconstruction
-            VertexDraw vertexDraw = new VertexDraw(vertex);
-            vertexDraw.Draw(e, Color.Red);
         }
     }
 }
