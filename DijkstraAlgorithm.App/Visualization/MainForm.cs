@@ -106,7 +106,8 @@
                         invokeRTB.Text = string.Empty;
                         var currentGraphPage = this.TabControl.TabPages[this.TabControl.SelectedIndex] as GraphPage;
 
-                        Dijkstra.GetShortestPath(invokeGraph, startId - 1, currentGraphPage.PictureBoxGraph);
+                        var dijkstra = new Dijkstra(invokeGraph);
+                        dijkstra.GetShortestPath(startId - 1, currentGraphPage.PictureBoxGraph);
 
                         WriteMessages(startId, invokeGraph, invokeRTB);
 

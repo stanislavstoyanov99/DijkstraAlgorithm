@@ -5,27 +5,42 @@
 
     using DijkstraAlgorithm.Models.Interfaces;
 
-    public static class Dijkstra
+    public class Dijkstra
     {
+        private const int DEFAULT_CURRENT_STEP = 0;
+        private const bool DEFAULT_IS_FINISHED = false;
+
+        private readonly int currentStep;
+        private readonly bool isFinished;
+
+        private readonly IGraph graph;
+
+        public Dijkstra(IGraph graph)
+        {
+            this.graph = graph;
+            this.currentStep = DEFAULT_CURRENT_STEP;
+            this.isFinished = DEFAULT_IS_FINISHED;
+        }
+
         /// <summary>
         /// Calculates the shortest distance between vertices using Dijkstra's algorithm.
         /// </summary>
-        public static void GetShortestPath(IGraph Graph, int startId, PictureBox pictureBoxGraph)
+        public void GetShortestPath(int startId, PictureBox pictureBoxGraph)
         {
-            IVertex initialVertex = Graph[startId];
+            IVertex initialVertex = graph[startId];
 
             initialVertex.MinCost = 0;
             initialVertex.Permanent = true;
             initialVertex.SourceId = initialVertex.Id;
 
-            foreach (var vertex in Graph.Vertices)
+            foreach (var vertex in graph.Vertices)
             {
                 int minCost = int.MaxValue;
                 int index = 0;
 
-                foreach (IVertex currVertex in Graph.NonPermanent())
+                foreach (IVertex currVertex in graph.NonPermanent())
                 {
-                    IEdge edge = Graph.GetEdge(initialVertex, currVertex);
+                    IEdge edge = graph.GetEdge(initialVertex, currVertex);
 
                     if (edge != null)
                     {
@@ -34,6 +49,8 @@
                         if (sum < currVertex.MinCost)
                         {
                             currVertex.MinCost = sum;
+
+                            // set the source id of the current vertex to be the same as the initial vertex
                             currVertex.SourceId = initialVertex.Id;
                         }
                     }
@@ -48,8 +65,8 @@
                     currVertex.Color = Color.Red;
                 }
 
-                Graph[index].Permanent = true;
-                initialVertex = Graph[index];
+                graph[index].Permanent = true;
+                initialVertex = graph[index];
             }
         }
     }

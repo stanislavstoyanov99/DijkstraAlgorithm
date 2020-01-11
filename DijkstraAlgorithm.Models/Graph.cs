@@ -31,6 +31,11 @@
             {
                 if (index >= 0 && this.vertices.Count != 0)
                 {
+                    if (index > this.vertices.Count)
+                    {
+                        throw new IndexOutOfRangeException(ExceptionMessages.MissingVertexId);
+                    }
+
                     return this.vertices[index];
                 }
                 else

@@ -8,6 +8,9 @@
         public const string InvalidStartVertexId 
             = "Vertex start number should be greater than or equal to zero.";
 
+        public const string MissingVertexId
+            = "Vertex id is missing. Please enter a correct number as a vertex id.";
+
         public const string MissingGraph 
             = "Please firstly construct your graph.";
 
