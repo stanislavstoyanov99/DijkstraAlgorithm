@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IGraphPage.cs" />
+    <Compile Include="Utilities\ConstantDelimeters.cs" />
     <Compile Include="Utilities\Messages\OutputMessages.cs" />
     <Compile Include="Visualization\CPictureBox.cs">
       <SubType>Component</SubType>

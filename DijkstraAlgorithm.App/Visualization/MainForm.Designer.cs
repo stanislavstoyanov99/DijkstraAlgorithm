@@ -33,7 +33,7 @@ namespace DijkstraAlgorithm.App
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.initialVertexId = new System.Windows.Forms.Label();
             this.textBoxInitial = new System.Windows.Forms.TextBox();
-            this.buttonRun = new System.Windows.Forms.Button();
+            this.buttonNext = new System.Windows.Forms.Button();
             this.buttonCloseTab = new System.Windows.Forms.Button();
             this.buttonAddTab = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,16 +70,16 @@ namespace DijkstraAlgorithm.App
             this.textBoxInitial.Size = new System.Drawing.Size(120, 22);
             this.textBoxInitial.TabIndex = 1;
             // 
-            // buttonRun
+            // buttonNext
             // 
-            this.buttonRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRun.Location = new System.Drawing.Point(337, 26);
-            this.buttonRun.Name = "buttonRun";
-            this.buttonRun.Size = new System.Drawing.Size(120, 40);
-            this.buttonRun.TabIndex = 2;
-            this.buttonRun.Text = "Run";
-            this.buttonRun.UseVisualStyleBackColor = true;
-            this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
+            this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNext.Location = new System.Drawing.Point(337, 26);
+            this.buttonNext.Name = "buttonNext";
+            this.buttonNext.Size = new System.Drawing.Size(120, 40);
+            this.buttonNext.TabIndex = 2;
+            this.buttonNext.Text = "Next step";
+            this.buttonNext.UseVisualStyleBackColor = true;
+            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // buttonCloseTab
             // 
@@ -233,7 +233,7 @@ namespace DijkstraAlgorithm.App
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonAddTab);
             this.Controls.Add(this.buttonCloseTab);
-            this.Controls.Add(this.buttonRun);
+            this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.textBoxInitial);
             this.Controls.Add(this.initialVertexId);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -254,7 +254,7 @@ namespace DijkstraAlgorithm.App
 
         private System.Windows.Forms.Label initialVertexId;
         private System.Windows.Forms.TextBox textBoxInitial;
-        private System.Windows.Forms.Button buttonRun;
+        private System.Windows.Forms.Button buttonNext;
         private System.Windows.Forms.Button buttonCloseTab;
         private System.Windows.Forms.Button buttonAddTab;
         private System.Windows.Forms.Label label1;

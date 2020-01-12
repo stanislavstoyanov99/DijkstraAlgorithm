@@ -4,15 +4,19 @@
 
     public interface IGraph
     {
-        IEnumerable<IVertex> NonVisited();
+        ICollection<IVertex> NonVisited();
 
-        IEnumerable<IVertex> NonPermanent();
+        ICollection<IVertex> NonPermanent();
+
+        IVertex GetNonPermanentVertex();
 
         IReadOnlyCollection<IVertex> Vertices { get; }
 
         IReadOnlyCollection<IEdge> Edges { get; }
 
         IVertex this[int index] { get; }
+
+        int VertexCount { get; }
 
         IEdge GetEdge(IVertex firstVertex, IVertex secondVertex);
 
@@ -23,8 +27,6 @@
         bool RemoveVertex(IVertex vertex);
 
         void Connect(IVertex firstVertex, IVertex secondVertex);
-
-        int VertexCount { get; }
 
         bool RemoveEdge(IEdge edge);
     }

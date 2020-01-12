@@ -23,12 +23,6 @@
         public const string InvalidTabName 
             = "Tab name cannot consist of numbers. Lowercase and uppercase letters, special symbols are allowed.";
 
-        public const string InfinityMessage 
-            = "Shortest distance between vertices {0} and {1} is INFINITY";
-
-        public const string DistanceMessage 
-            = "Shortest distance between vertices {0} and {1} is {2}";
-
         public const string AlgorithmDefinedMessage
             = "Please choose algorithm to run.";
 

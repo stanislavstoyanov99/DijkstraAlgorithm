@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Dijkstra.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Messages\OutputMessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DijkstraAlgorithm.Drawing\DijkstraAlgorithm.Drawing.csproj">

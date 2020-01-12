@@ -174,7 +174,7 @@
         /// <summary>
         /// Returns all vertices whose 'permanent variable' is false
         /// </summary>
-        public IEnumerable<IVertex> NonPermanent()
+        public ICollection<IVertex> NonPermanent()
         {
             var nonPermanentVertices = this.vertices
                 .Where(v => v.Permanent == false)
@@ -183,10 +183,18 @@
             return nonPermanentVertices;
         }
 
+        public IVertex GetNonPermanentVertex()
+        {
+            var nonPernamentVertex = this.vertices
+                .FirstOrDefault(v => v.Permanent == false);
+
+            return nonPernamentVertex;
+        }
+
         /// <summary>
         /// Returns all unvisited vertices in a graph
         /// </summary>
-        public IEnumerable<IVertex> NonVisited()
+        public ICollection<IVertex> NonVisited()
         {
             var nonVisitedVertices = this.vertices
                 .Where(v => v.Visited == false)
