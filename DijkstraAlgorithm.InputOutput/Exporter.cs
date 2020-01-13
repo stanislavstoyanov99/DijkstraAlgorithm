@@ -23,7 +23,7 @@
         }
 
         // Using a JSON.NET library to export the GraphDto object to a json file at a specified path
-        public void Export(GraphDto graphDto, string path)
+        private void Export(GraphDto graphDto, string path)
         {
             string jsonExport = JsonConvert.SerializeObject(graphDto, new JsonSerializerSettings()
             {

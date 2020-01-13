@@ -1,7 +1,6 @@
 ﻿namespace DijkstraAlgorithm.InputOutput.Dtos
 {
     using System.Drawing;
-    using System.Collections.Generic;
 
     public class VertexDto
     {

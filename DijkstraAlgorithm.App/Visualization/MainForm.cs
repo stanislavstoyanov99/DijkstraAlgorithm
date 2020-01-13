@@ -7,10 +7,13 @@
     using Dijkstra;
     using DijkstraAlgorithm.Models;
     using DijkstraAlgorithm.Models.Interfaces;
+
     using static DijkstraAlgorithm.Models.Utilities.ConstantDelimeters;
 
     using DijkstraAlgorithm.App.Visualization;
+
     using static App.Utilities.ConstantDelimeters;
+
     using DijkstraAlgorithm.App.Utilities.Messages;
     using DijkstraAlgorithm.InputOutput.Interfaces;
 
@@ -174,7 +177,8 @@
 
                 this.invokeGraph = this.importer.Import(path);
 
-                // TODO
+                var graphPage = new GraphPage(this.invokeGraph);
+
                 this.PictureBoxGraph.Invalidate();
                 this.TapPageMatrix.Invalidate();
             }
