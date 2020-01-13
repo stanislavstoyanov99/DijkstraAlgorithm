@@ -12,6 +12,7 @@
     using DijkstraAlgorithm.App.Visualization;
     using static App.Utilities.ConstantDelimeters;
     using DijkstraAlgorithm.App.Utilities.Messages;
+    using DijkstraAlgorithm.InputOutput.Interfaces;
 
     public partial class MainForm : Form
     {
@@ -21,15 +22,21 @@
         private RichTextBox invokeRTB;
         private IGraph invokeGraph;
 
-        public MainForm()
+        private IImporter importer;
+        private IExporter exporter;
+
+        public MainForm(IImporter importer, IExporter exporter)
         {
             InitializeComponent();
 
             this.currentStep = MainFormConstants.DEFAULT_CURRENT_STEP;
             this.isFinished = MainFormConstants.DEFAULT_IS_FINISHED;
+
+            this.importer = importer;
+            this.exporter = exporter;
         }
 
-        private void buttonAddTab_Click(object sender, EventArgs e)
+        private void ButtonAddTab_Click(object sender, EventArgs e)
         {
             var graph = new Graph();
             var graphPage = new GraphPage(graph);
@@ -65,7 +72,7 @@
             rbDijkstra.Checked = false;
         }
 
-        private void buttonCloseTab_Click(object sender, EventArgs e)
+        private void ButtonCloseTab_Click(object sender, EventArgs e)
         {
             if (this.TabControl.TabCount != 1)
             {
@@ -78,7 +85,7 @@
             }
         }
 
-        private void buttonNext_Click(object sender, EventArgs e)
+        private void ButtonNext_Click(object sender, EventArgs e)
         {
             if (!(this.TabControl.TabCount > 1))
             {
@@ -150,16 +157,54 @@
             }
         }
 
-        // TODO
-        private void loadButton_Click(object sender, EventArgs e)
+        // Open a file dialog window and then import the graph from the specified path using importer.
+        private void LoadButton_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                InitialDirectory = $"{Environment.CurrentDirectory}",
+                Filter = "Json files (*.json)|*.json"
+            };
 
+            DialogResult dialogResult = openFileDialog.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                string path = openFileDialog.FileName;
+
+                this.invokeGraph = this.importer.Import(path);
+
+                // TODO
+                this.PictureBoxGraph.Invalidate();
+                this.TapPageMatrix.Invalidate();
+            }
+
+            openFileDialog.Dispose();
         }
 
-        // TODO
-        private void saveButton_Click(object sender, EventArgs e)
+        // Open a save file dialog window and then export the graph using the exporter to the specified path. 
+        private void SaveButton_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = $"{Environment.CurrentDirectory}",
+                Filter = "Json files (*.json)|*.json"
+            };
 
+            DialogResult dialogResult = saveFileDialog.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                string path = saveFileDialog.FileName;
+
+                this.exporter.Export(this.invokeGraph, path);
+            }
+
+            saveFileDialog.Dispose();
+            MessageBox.Show(OutputMessages.SuccessfullySavedGraph,
+                "Information",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }

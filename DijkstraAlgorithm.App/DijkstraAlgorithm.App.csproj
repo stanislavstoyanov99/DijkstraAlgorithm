@@ -98,6 +98,10 @@
       <Project>{FF606AA9-2A1B-4172-A314-607821CA8895}</Project>
       <Name>DijkstraAlgorithm.Drawing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DijkstraAlgorithm.InputOutput\DijkstraAlgorithm.InputOutput.csproj">
+      <Project>{B6B161E8-D5C7-4CE8-92C9-35F216B4D30A}</Project>
+      <Name>DijkstraAlgorithm.InputOutput</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DijkstraAlgorithm.Models\DijkstraAlgorithm.Models.csproj">
       <Project>{feb0ceca-4f13-4de4-93d9-35aa3ff91159}</Project>
       <Name>DijkstraAlgorithm.Models</Name>

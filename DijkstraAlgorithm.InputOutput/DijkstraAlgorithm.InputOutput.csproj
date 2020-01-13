@@ -31,8 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,15 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Export.cs" />
-    <Compile Include="Import.cs" />
-    <Compile Include="Interfaces\IExport.cs" />
-    <Compile Include="Interfaces\IImport.cs" />
+    <Compile Include="Dtos\EdgeDto.cs" />
+    <Compile Include="Dtos\GraphDto.cs" />
+    <Compile Include="Dtos\VertexDto.cs" />
+    <Compile Include="Exporter.cs" />
+    <Compile Include="Importer.cs" />
+    <Compile Include="Interfaces\IExporter.cs" />
+    <Compile Include="Interfaces\IImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dtos\ExportDtos\" />
-    <Folder Include="Dtos\ImportDtos\" />
+    <ProjectReference Include="..\DijkstraAlgorithm.Models\DijkstraAlgorithm.Models.csproj">
+      <Project>{FEB0CECA-4F13-4DE4-93D9-35AA3FF91159}</Project>
+      <Name>DijkstraAlgorithm.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

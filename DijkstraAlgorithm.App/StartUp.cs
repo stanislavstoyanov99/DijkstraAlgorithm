@@ -3,6 +3,9 @@
     using System;
     using System.Windows.Forms;
 
+    using DijkstraAlgorithm.InputOutput;
+    using DijkstraAlgorithm.InputOutput.Interfaces;
+
     public static class StartUp
     {
         /// <summary>
@@ -11,9 +14,12 @@
         [STAThread]
         public static void Main()
         {
+            IExporter exporter = new Exporter();
+            IImporter importer = new Importer();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new MainForm(importer, exporter));
         }
     }
 }

@@ -79,7 +79,7 @@ namespace DijkstraAlgorithm.App
             this.buttonNext.TabIndex = 2;
             this.buttonNext.Text = "Next step";
             this.buttonNext.UseVisualStyleBackColor = true;
-            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
+            this.buttonNext.Click += new System.EventHandler(this.ButtonNext_Click);
             // 
             // buttonCloseTab
             // 
@@ -90,7 +90,7 @@ namespace DijkstraAlgorithm.App
             this.buttonCloseTab.TabIndex = 2;
             this.buttonCloseTab.Text = "Close current tab";
             this.buttonCloseTab.UseVisualStyleBackColor = true;
-            this.buttonCloseTab.Click += new System.EventHandler(this.buttonCloseTab_Click);
+            this.buttonCloseTab.Click += new System.EventHandler(this.ButtonCloseTab_Click);
             // 
             // buttonAddTab
             // 
@@ -101,7 +101,7 @@ namespace DijkstraAlgorithm.App
             this.buttonAddTab.TabIndex = 2;
             this.buttonAddTab.Text = "Add tab";
             this.buttonAddTab.UseVisualStyleBackColor = true;
-            this.buttonAddTab.Click += new System.EventHandler(this.buttonAddTab_Click);
+            this.buttonAddTab.Click += new System.EventHandler(this.ButtonAddTab_Click);
             // 
             // label1
             // 
@@ -205,7 +205,7 @@ namespace DijkstraAlgorithm.App
             this.loadButton.TabIndex = 7;
             this.loadButton.Text = "Load graph";
             this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
+            this.loadButton.Click += new System.EventHandler(this.LoadButton_Click);
             // 
             // saveButton
             // 
@@ -216,7 +216,7 @@ namespace DijkstraAlgorithm.App
             this.saveButton.TabIndex = 8;
             this.saveButton.Text = "Save graph";
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // MainForm
             // 

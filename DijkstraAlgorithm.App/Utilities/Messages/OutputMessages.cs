@@ -28,5 +28,8 @@
 
         public const string TabPageNotFound 
             = "Please add new work tab page.";
+
+        public const string SuccessfullySavedGraph
+            = "The graph has been successfully saved.";
     }
 }
