@@ -1,29 +1,30 @@
 ﻿namespace DijkstraAlgorithm.InputOutput
 {
+    using System.IO;
     using System.Linq;
 
     using DijkstraAlgorithm.Models;
     using DijkstraAlgorithm.InputOutput.Dtos;
     using DijkstraAlgorithm.Models.Interfaces;
     using DijkstraAlgorithm.InputOutput.Interfaces;
+
     using Newtonsoft.Json;
-    using System.IO;
 
     public class Importer : IImporter
     {
-        // Import the GraphDto from a json file then get the new graph
+        // Import the GraphDto from a json file then get the new graph into the Graph Page
         public IGraph Import(string path)
         {
             GraphDto graphDto = ImportGraphDtoFromJson(path);
 
-            GetGraphFromDto(graphDto, out IGraph graph);
+            IGraph graph = GetGraphFromDto(graphDto);
 
             return graph;
         }
 
-        private void GetGraphFromDto(GraphDto graphDto, out IGraph graph)
+        private IGraph GetGraphFromDto(GraphDto graphDto)
         {
-            graph = new Graph();
+            IGraph graph = new Graph();
 
             foreach (var vertexDto in graphDto.Vertices)
             {
@@ -44,10 +45,10 @@
                 IVertex secondVertex = graph.Vertices
                     .First(v => v.Id + 1 == edgeDto.SecondVertexId);
 
-                graph.Connect(firstVertex, secondVertex);
+                graph.Connect(firstVertex, secondVertex, edgeDto.Weight);
             }
 
-            // TODO
+            return graph;
         }
 
         // Using a JSON.NET import the data from a specified json file into a GraphDto object 

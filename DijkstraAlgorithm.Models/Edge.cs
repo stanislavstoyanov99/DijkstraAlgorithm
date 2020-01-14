@@ -9,12 +9,19 @@
 
     public class Edge : IEdge
     {
-        public Edge(IVertex FirstVertex, IVertex SecondVertex)
+        public Edge(IVertex firstVertex, IVertex secondVertex)
         {
-            this.FirstVertex = FirstVertex;
-            this.SecondVertex = SecondVertex;
+            this.FirstVertex = firstVertex;
+            this.SecondVertex = secondVertex;
 
             this.Weight = EdgeConstants.INITIAL_WEIGHT;
+        }
+
+        public Edge(IVertex firstVertex, IVertex secondVertex, int weight)
+        {
+            this.FirstVertex = firstVertex;
+            this.SecondVertex = secondVertex;
+            this.Weight = weight;
         }
 
         public IVertex FirstVertex { get; set; }

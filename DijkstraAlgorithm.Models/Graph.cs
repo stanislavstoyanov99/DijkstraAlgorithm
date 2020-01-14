@@ -147,6 +147,19 @@
         }
 
         /// <summary>
+        /// Connects two vertices with their weight, which is taken from outside
+        /// </summary>
+        public void Connect(IVertex firstVertex, IVertex secondVertex, int weight)
+        {
+            var edgeToAdd = new Edge(firstVertex, secondVertex, weight);
+
+            if (!this.edges.Contains(edgeToAdd) && edgeToAdd != null)
+            {
+                this.edges.Add(edgeToAdd);
+            }
+        }
+
+        /// <summary>
         /// Returns an Edge of two vertices
         /// </summary>
         public IEdge GetEdge(IVertex firstVertex, IVertex secondVertex)

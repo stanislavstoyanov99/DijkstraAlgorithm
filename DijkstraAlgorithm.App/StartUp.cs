@@ -3,6 +3,9 @@
     using System;
     using System.Windows.Forms;
 
+    using DijkstraAlgorithm.Models;
+    using DijkstraAlgorithm.Models.Interfaces;
+
     using DijkstraAlgorithm.InputOutput;
     using DijkstraAlgorithm.InputOutput.Interfaces;
 

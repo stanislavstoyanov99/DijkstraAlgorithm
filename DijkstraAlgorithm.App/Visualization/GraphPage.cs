@@ -39,22 +39,22 @@
 
         public IGraph InvokeGraph { get; private set; }
 
-        public GraphPage(IGraph Graph, string tabName = "New tab")
+        public GraphPage(IGraph graph, string tabName = "New tab")
         {
             this.Text = tabName;
             this.BackColor = Color.White;
-            this.InvokeGraph = Graph;
+            this.InvokeGraph = graph;
 
             this.AddControls();
 
-            this.PictureBoxGraph.Paint += (sender, e) => Graph_OnPaint(e, Graph);
-            this.PictureBoxMatrix.Paint += (sender, e) => Matrix_OnPaint(e, Graph);
+            this.PictureBoxGraph.Paint += (sender, e) => Graph_OnPaint(e, graph);
+            this.PictureBoxMatrix.Paint += (sender, e) => Matrix_OnPaint(e, graph);
 
-            Mouse_Down(Graph);
-            Mouse_Up(Graph);
+            Mouse_Down(graph);
+            Mouse_Up(graph);
             Mouse_Move();
 
-            Mouse_Down_Matrix(Graph);
+            Mouse_Down_Matrix(graph);
             Mouse_Move_Matrix();
         }
 
@@ -72,7 +72,7 @@
             };
         }
 
-        private void Mouse_Up(IGraph Graph)
+        private void Mouse_Up(IGraph graph)
         {
             this.PictureBoxGraph.MouseUp += delegate (object sender, MouseEventArgs e)
             {
@@ -84,12 +84,12 @@
                     int destinationX = this.destination.X / VertexConstants.CENTER_DIAMETER;
                     int destinationY = this.destination.Y / VertexConstants.CENTER_DIAMETER;
 
-                    IVertex firstVertex = Graph.GetVertex(sourceX, sourceY);
-                    IVertex secondVertex = Graph.GetVertex(destinationX, destinationY);
+                    IVertex firstVertex = graph.GetVertex(sourceX, sourceY);
+                    IVertex secondVertex = graph.GetVertex(destinationX, destinationY);
 
                     if (firstVertex != null && secondVertex != null && firstVertex != secondVertex && onHold)
                     {
-                        Graph.Connect(firstVertex, secondVertex);
+                        graph.Connect(firstVertex, secondVertex);
                     }
 
                     // Redraw graph box and matrix box
@@ -101,21 +101,21 @@
             };
         }
 
-        private void Mouse_Down(IGraph Graph)
+        private void Mouse_Down(IGraph graph)
         {
             this.PictureBoxGraph.MouseDown += delegate (object sender, MouseEventArgs e)
             {
                 int x = e.X / VertexConstants.CENTER_DIAMETER;
                 int y = e.Y / VertexConstants.CENTER_DIAMETER;
 
-                IVertex vertex = Graph.GetVertex(x, y);
+                IVertex vertex = graph.GetVertex(x, y);
 
                 // With left button - adds vertex; with right button - removes it
                 if (e.Button == MouseButtons.Left)
                 {
                     if (vertex == null)
                     {
-                        bool result = Graph.AddVertex(new Vertex(Graph.VertexCount)
+                        bool result = graph.AddVertex(new Vertex(graph.VertexCount)
                         {
                             X = x,
                             Y = y
@@ -135,7 +135,7 @@
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
-                    bool isRemoved = Graph.RemoveVertex(vertex);
+                    bool isRemoved = graph.RemoveVertex(vertex);
 
                     if (!isRemoved)
                     {
@@ -149,26 +149,26 @@
             };
         }
 
-        private void Mouse_Down_Matrix(IGraph Graph)
+        private void Mouse_Down_Matrix(IGraph graph)
         {
             this.PictureBoxMatrix.MouseDown += delegate (object sender, MouseEventArgs e)
             {
                 int row = e.X / VertexConstants.CENTER_DIAMETER - 1;
                 int col = e.Y / VertexConstants.CENTER_DIAMETER - 1;
 
-                if (row != col && row < Graph.VertexCount && col < Graph.VertexCount && row > -1 && col > -1)
+                if (row != col && row < graph.VertexCount && col < graph.VertexCount && row > -1 && col > -1)
                 {
                     if (e.Button == MouseButtons.Left)
                     {
-                        Graph.Connect(Graph[row], Graph[col]);
+                        graph.Connect(graph[row], graph[col]);
                     }
                     else if (e.Button == MouseButtons.Right)
                     {
-                        IEdge edge = Graph.GetEdge(Graph[row], Graph[col]);
+                        IEdge edge = graph.GetEdge(graph[row], graph[col]);
 
                         if (edge != null && edge.Weight - 1 == 0)
                         {
-                            Graph.RemoveEdge(edge);
+                            graph.RemoveEdge(edge);
                         }
                         else if (edge == null)
                         {
@@ -342,14 +342,16 @@
                     // Ensure there isn't any loop on matrix diagonal
                     if (row == col)
                     {
-                        e.Graphics.DrawString(string.Format("{0,2}", "-"), font, solidBrush, x + 2, y + 7);
+                        e.Graphics
+                            .DrawString(string.Format("{0,2}", "-"), font, solidBrush, x + 2, y + 7);
                     }
 
                     foreach (IEdge edge in Graph.Edges)
                     {
                         if ((edge[0].Id == row && edge[1].Id == col) || (edge[0].Id == col && edge[1].Id == row))
                         {
-                            e.Graphics.DrawString(string.Format("{0,2}", edge.Weight), this.Font, solidBrush, x + 6, y + 9);
+                            e.Graphics
+                                .DrawString(string.Format("{0,2}", edge.Weight), this.Font, solidBrush, x + 6, y + 9);
                         }
                     }
 

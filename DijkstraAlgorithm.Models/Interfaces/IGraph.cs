@@ -28,6 +28,8 @@
 
         void Connect(IVertex firstVertex, IVertex secondVertex);
 
+        void Connect(IVertex firstVertex, IVertex secondVertex, int weight);
+
         bool RemoveEdge(IEdge edge);
     }
 }

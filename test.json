@@ -1,0 +1,71 @@
+{
+  "vertices": [
+    {
+      "id": 0,
+      "x": 5,
+      "y": 3,
+      "sourceId": 0,
+      "minCost": 0,
+      "center": "165, 105"
+    },
+    {
+      "id": 1,
+      "x": 4,
+      "y": 7,
+      "sourceId": 0,
+      "minCost": 2147483647,
+      "center": "135, 225"
+    },
+    {
+      "id": 2,
+      "x": 10,
+      "y": 4,
+      "sourceId": 0,
+      "minCost": 2147483647,
+      "center": "315, 135"
+    },
+    {
+      "id": 3,
+      "x": 11,
+      "y": 7,
+      "sourceId": 0,
+      "minCost": 2147483647,
+      "center": "345, 225"
+    },
+    {
+      "id": 4,
+      "x": 8,
+      "y": 12,
+      "sourceId": 0,
+      "minCost": 2147483647,
+      "center": "255, 375"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 5,
+      "firstVertexId": 2,
+      "secondVertexId": 1
+    },
+    {
+      "weight": 4,
+      "firstVertexId": 5,
+      "secondVertexId": 1
+    },
+    {
+      "weight": 2,
+      "firstVertexId": 3,
+      "secondVertexId": 2
+    },
+    {
+      "weight": 1,
+      "firstVertexId": 5,
+      "secondVertexId": 4
+    },
+    {
+      "weight": 3,
+      "firstVertexId": 4,
+      "secondVertexId": 3
+    }
+  ]
+}

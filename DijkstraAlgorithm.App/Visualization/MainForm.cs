@@ -25,8 +25,8 @@
         private RichTextBox invokeRTB;
         private IGraph invokeGraph;
 
-        private IImporter importer;
-        private IExporter exporter;
+        private readonly IImporter importer;
+        private readonly IExporter exporter;
 
         public MainForm(IImporter importer, IExporter exporter)
         {
@@ -90,6 +90,8 @@
 
         private void ButtonNext_Click(object sender, EventArgs e)
         {
+            this.isFinished = MainFormConstants.DEFAULT_IS_FINISHED;
+
             if (!(this.TabControl.TabCount > 1))
             {
                 MessageBox.Show(OutputMessages.TabPageNotFound, "Warning");
@@ -136,6 +138,8 @@
                                 if (result == true)
                                 {
                                     this.isFinished = true;
+
+                                    this.currentStep = MainFormConstants.DEFAULT_CURRENT_STEP;
                                 }
                                 else
                                 {
@@ -160,6 +164,7 @@
             }
         }
 
+        // Below methods are for Input/Output
         // Open a file dialog window and then import the graph from the specified path using importer.
         private void LoadButton_Click(object sender, EventArgs e)
         {
@@ -179,8 +184,16 @@
 
                 var graphPage = new GraphPage(this.invokeGraph);
 
-                this.PictureBoxGraph.Invalidate();
-                this.TapPageMatrix.Invalidate();
+                if (this.TabControl.TabCount < GraphConstants.GRAPH_LIMIT)
+                {
+                    this.TabControl.TabPages.Add(graphPage);
+
+                    this.TabControl.SelectedIndex = graphPage.TabControl.TabCount - 1;
+                }
+                else
+                {
+                    MessageBox.Show(string.Format(OutputMessages.TabLimitWarning, GraphConstants.GRAPH_LIMIT), "Warning");
+                }
             }
 
             openFileDialog.Dispose();
