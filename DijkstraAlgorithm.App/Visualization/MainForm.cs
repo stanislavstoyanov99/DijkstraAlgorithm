@@ -215,13 +215,14 @@
                 string path = saveFileDialog.FileName;
 
                 this.exporter.Export(this.invokeGraph, path);
+
+                MessageBox.Show(OutputMessages.SuccessfullySavedGraph,
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
 
             saveFileDialog.Dispose();
-            MessageBox.Show(OutputMessages.SuccessfullySavedGraph,
-                "Information",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
         }
     }
 }
